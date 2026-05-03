@@ -1,0 +1,2339 @@
+# Copyright (c) Digital Substrate 2026, All rights reserved.
+# Generated from GE.dsmb by kibo-1.2.0.jar
+
+"""
+Python classes for concepts, clubs, enums and structs defined for ge.
+"""
+
+from __future__ import annotations
+import dsviper
+import typing
+from . import value_type as mt
+from . import definitions as md
+
+T = typing.TypeVar("T")
+R = typing.TypeVar("R")
+
+class classproperty(typing.Generic[T, R]):
+    def __init__(self, func: typing.Callable[[type[T]], R]) -> None:
+        self.func = func
+
+    def __get__(self, obj: typing.Any, cls: type[T]) -> R:
+        return self.func(cls)
+
+
+class Proxy:
+
+    __slots__ = ["vpr_value"]
+
+    def __init__(self, vpr_value):
+        self.vpr_value = vpr_value
+
+    def __hash__(self) -> int:
+        return hash(self.vpr_value)
+
+    def __repr__(self) -> str:
+        return repr(self.vpr_value)
+
+    def __lt__(self, other: Proxy) -> bool:
+        return self.vpr_value < other.vpr_value
+
+    def __le__(self, other: Proxy) -> bool:
+        return self.vpr_value <= other.vpr_value
+
+    def __eq__(self, other: Proxy) -> bool:
+        return self.vpr_value == other.vpr_value
+
+    def __ne__(self, other: Proxy) -> bool:
+        return self.vpr_value != other.vpr_value
+
+    def __gt__(self, other: Proxy) -> bool:
+        return self.vpr_value > other.vpr_value
+
+    def __ge__(self, other: Proxy) -> bool:
+        return self.vpr_value >= other.vpr_value
+
+    def encode(self, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) -> dsviper.ValueBlob:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        return dsviper.Value.encode(self.vpr_value, stream_codec_instancing=stream_codec_instancing)
+
+    def write(self, stream_writing: dsviper.StreamWriting) -> None:
+        return dsviper.Value.write(self.vpr_value, stream_writing)
+
+    def hexdigest(self) -> str:
+        return dsviper.Value.hexdigest(self.vpr_value)
+
+# AnyConceptKey
+class AnyConceptKey(Proxy):
+    """A proxy class for a key<any_concept>."""
+
+    __slots__ = []
+
+    def __init__(self, value):
+        if not isinstance(value, dsviper.ValueKey):
+            raise TypeError("value is not a Key")
+        if not dsviper.ValueKey.cast(value).type_key().is_any_concept():
+            raise ValueError("value is not a Key for any_concept")
+        super().__init__(value)
+
+    def __repr__(self) -> str:
+        return self.description()
+
+    def instance_id(self) -> dsviper.ValueUUId:
+        return self.vpr_value.instance_id()
+
+    def runtime_id(self) -> dsviper.ValueUUId:
+        return self.vpr_value.type_concept().runtime_id()
+
+    def description(self) -> str:
+        match self.runtime_id():
+            case md.RuntimeIds.Graph_Edge:
+                return f'{self.instance_id().encoded()}:AnyConceptKey(Graph::EdgeKey)'
+            case md.RuntimeIds.Graph_Graph:
+                return f'{self.instance_id().encoded()}:AnyConceptKey(Graph::GraphKey)'
+            case md.RuntimeIds.Graph_Vertex:
+                return f'{self.instance_id().encoded()}:AnyConceptKey(Graph::VertexKey)'
+            case _:
+                return f'{self.instance_id().encoded()}:AnyConceptKey({self.runtime_id().encoded()})'
+
+    def is_known(self) -> bool:
+        match self.runtime_id():
+            case md.RuntimeIds.Graph_Edge:
+                return True
+            case md.RuntimeIds.Graph_Graph:
+                return True
+            case md.RuntimeIds.Graph_Vertex:
+                return True
+            case _:
+                return False
+
+    def is_valid(self) -> bool:
+        return self.instance_id().is_valid()
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->AnyConceptKey:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueKey.cast(dsviper.Value.decode(blob, mt.type_AnyConceptKey(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return AnyConceptKey(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) ->AnyConceptKey:
+        value = dsviper.ValueKey.cast(dsviper.Value.read(mt.type_AnyConceptKey(), stream_reading, md.definitions()))
+        return AnyConceptKey(value)
+
+# Namespace Graph
+# concept Graph::EdgeKey
+class Graph_EdgeKey(Proxy):
+    """
+    [A proxy class for a key<Graph::EdgeKey>]
+
+    An edge in a graph.
+    """
+
+    __slots__ = []
+
+    def __init__(self, identifier: dsviper.ValueKey | dsviper.ValueUUId | str):
+        if isinstance(identifier, dsviper.ValueKey):
+            assert identifier.type() == mt.type_Graph_EdgeKey()
+            super().__init__(identifier)
+        elif isinstance(identifier, str) or isinstance(identifier, dsviper.ValueUUId):
+            super().__init__(dsviper.ValueKey.create(mt.type_check_Graph_EdgeKey(), identifier))
+        else:
+            raise TypeError("identifier must be a ValueKey, a ValueUUId or a str.")
+
+    def __repr__(self) -> str:
+        return self.description()
+
+    @staticmethod
+    def create() -> Graph_EdgeKey:
+        return Graph_EdgeKey(dsviper.ValueUUId.create())
+
+    @staticmethod
+    def from_any_concept_key(key: AnyConceptKey) -> Graph_EdgeKey | None:
+        match key.runtime_id():
+            case md.RuntimeIds.Graph_Edge:
+                return Graph_EdgeKey(key.instance_id())
+            case _:
+                return None
+
+    def to_any_concept_key(self) -> AnyConceptKey:
+        return AnyConceptKey(self.vpr_value.to_any_concept_key())
+
+    def instance_id(self) -> dsviper.ValueUUId:
+        return self.vpr_value.instance_id()
+
+    def runtime_id(self) -> dsviper.ValueUUId:
+        return self.vpr_value.type_concept().runtime_id()
+
+    def description(self) -> str:
+        match self.runtime_id():
+            case  md.RuntimeIds.Graph_Edge:
+                return f'{self.instance_id().encoded()}:Graph::EdgeKey'
+            case _:
+                return f'{self.instance_id().encoded()}:Graph::EdgeKey({self.runtime_id()})'
+
+    def is_known(self) -> bool:
+        match self.runtime_id():
+            case md.RuntimeIds.Graph_Edge:
+                return True
+            case _:
+                return False
+
+    def is_valid(self) -> bool:
+        return self.instance_id().is_valid()
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) -> Graph_EdgeKey:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueKey.cast(dsviper.Value.decode(blob, mt.type_Graph_EdgeKey(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Graph_EdgeKey(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Graph_EdgeKey:
+        value = dsviper.ValueKey.cast(dsviper.Value.read(mt.type_Graph_EdgeKey(), stream_reading, md.definitions()))
+        return Graph_EdgeKey(value)
+
+# concept Graph::GraphKey
+class Graph_GraphKey(Proxy):
+    """
+    [A proxy class for a key<Graph::GraphKey>]
+
+    A graph.
+    """
+
+    __slots__ = []
+
+    def __init__(self, identifier: dsviper.ValueKey | dsviper.ValueUUId | str):
+        if isinstance(identifier, dsviper.ValueKey):
+            assert identifier.type() == mt.type_Graph_GraphKey()
+            super().__init__(identifier)
+        elif isinstance(identifier, str) or isinstance(identifier, dsviper.ValueUUId):
+            super().__init__(dsviper.ValueKey.create(mt.type_check_Graph_GraphKey(), identifier))
+        else:
+            raise TypeError("identifier must be a ValueKey, a ValueUUId or a str.")
+
+    def __repr__(self) -> str:
+        return self.description()
+
+    @staticmethod
+    def create() -> Graph_GraphKey:
+        return Graph_GraphKey(dsviper.ValueUUId.create())
+
+    @staticmethod
+    def from_any_concept_key(key: AnyConceptKey) -> Graph_GraphKey | None:
+        match key.runtime_id():
+            case md.RuntimeIds.Graph_Graph:
+                return Graph_GraphKey(key.instance_id())
+            case _:
+                return None
+
+    def to_any_concept_key(self) -> AnyConceptKey:
+        return AnyConceptKey(self.vpr_value.to_any_concept_key())
+
+    def instance_id(self) -> dsviper.ValueUUId:
+        return self.vpr_value.instance_id()
+
+    def runtime_id(self) -> dsviper.ValueUUId:
+        return self.vpr_value.type_concept().runtime_id()
+
+    def description(self) -> str:
+        match self.runtime_id():
+            case  md.RuntimeIds.Graph_Graph:
+                return f'{self.instance_id().encoded()}:Graph::GraphKey'
+            case _:
+                return f'{self.instance_id().encoded()}:Graph::GraphKey({self.runtime_id()})'
+
+    def is_known(self) -> bool:
+        match self.runtime_id():
+            case md.RuntimeIds.Graph_Graph:
+                return True
+            case _:
+                return False
+
+    def is_valid(self) -> bool:
+        return self.instance_id().is_valid()
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) -> Graph_GraphKey:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueKey.cast(dsviper.Value.decode(blob, mt.type_Graph_GraphKey(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Graph_GraphKey(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Graph_GraphKey:
+        value = dsviper.ValueKey.cast(dsviper.Value.read(mt.type_Graph_GraphKey(), stream_reading, md.definitions()))
+        return Graph_GraphKey(value)
+
+# concept Graph::VertexKey
+class Graph_VertexKey(Proxy):
+    """
+    [A proxy class for a key<Graph::VertexKey>]
+
+    A vertex in a graph.
+    """
+
+    __slots__ = []
+
+    def __init__(self, identifier: dsviper.ValueKey | dsviper.ValueUUId | str):
+        if isinstance(identifier, dsviper.ValueKey):
+            assert identifier.type() == mt.type_Graph_VertexKey()
+            super().__init__(identifier)
+        elif isinstance(identifier, str) or isinstance(identifier, dsviper.ValueUUId):
+            super().__init__(dsviper.ValueKey.create(mt.type_check_Graph_VertexKey(), identifier))
+        else:
+            raise TypeError("identifier must be a ValueKey, a ValueUUId or a str.")
+
+    def __repr__(self) -> str:
+        return self.description()
+
+    @staticmethod
+    def create() -> Graph_VertexKey:
+        return Graph_VertexKey(dsviper.ValueUUId.create())
+
+    @staticmethod
+    def from_any_concept_key(key: AnyConceptKey) -> Graph_VertexKey | None:
+        match key.runtime_id():
+            case md.RuntimeIds.Graph_Vertex:
+                return Graph_VertexKey(key.instance_id())
+            case _:
+                return None
+
+    def to_any_concept_key(self) -> AnyConceptKey:
+        return AnyConceptKey(self.vpr_value.to_any_concept_key())
+
+    def instance_id(self) -> dsviper.ValueUUId:
+        return self.vpr_value.instance_id()
+
+    def runtime_id(self) -> dsviper.ValueUUId:
+        return self.vpr_value.type_concept().runtime_id()
+
+    def description(self) -> str:
+        match self.runtime_id():
+            case  md.RuntimeIds.Graph_Vertex:
+                return f'{self.instance_id().encoded()}:Graph::VertexKey'
+            case _:
+                return f'{self.instance_id().encoded()}:Graph::VertexKey({self.runtime_id()})'
+
+    def is_known(self) -> bool:
+        match self.runtime_id():
+            case md.RuntimeIds.Graph_Vertex:
+                return True
+            case _:
+                return False
+
+    def is_valid(self) -> bool:
+        return self.instance_id().is_valid()
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) -> Graph_VertexKey:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueKey.cast(dsviper.Value.decode(blob, mt.type_Graph_VertexKey(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Graph_VertexKey(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Graph_VertexKey:
+        value = dsviper.ValueKey.cast(dsviper.Value.read(mt.type_Graph_VertexKey(), stream_reading, md.definitions()))
+        return Graph_VertexKey(value)
+
+# struct Graph::Color
+class Graph_Color(Proxy):
+    """
+    [A proxy class for struct Graph::Color]
+
+    An RGB Color.
+    """
+
+    __slots__ = ()
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueStructure):
+            assert value.type() == mt.type_Graph_Color()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueStructure(mt.type_Graph_Color(), value))
+
+    @property
+    def red(self) -> float:
+        v = self.vpr_value.at("red")
+        return v
+
+    @red.setter
+    def red(self, value: float) -> None:
+        self.vpr_value.set("red", value)
+
+    @property
+    def green(self) -> float:
+        v = self.vpr_value.at("green")
+        return v
+
+    @green.setter
+    def green(self, value: float) -> None:
+        self.vpr_value.set("green", value)
+
+    @property
+    def blue(self) -> float:
+        v = self.vpr_value.at("blue")
+        return v
+
+    @blue.setter
+    def blue(self, value: float) -> None:
+        self.vpr_value.set("blue", value)
+
+
+    def copy(self) -> Graph_Color:
+        return Graph_Color(self.vpr_value.copy())
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None, pack_sized: bool = False) -> Graph_Color:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueStructure.cast(dsviper.Value.decode(blob, mt.type_Graph_Color(), md.definitions(), stream_codec_instancing=stream_codec_instancing, pack_sized=pack_sized))
+        return Graph_Color(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading, pack_sized: bool = False) -> Graph_Color:
+        value = dsviper.ValueStructure.cast(dsviper.Value.read(mt.type_Graph_Color(), stream_reading, md.definitions(), pack_sized=pack_sized))
+        return Graph_Color(value)
+
+# struct Graph::EdgeTopology
+class Graph_EdgeTopology(Proxy):
+    """
+    [A proxy class for struct Graph::EdgeTopology]
+
+    An edge in the graph topology.
+    """
+
+    __slots__ = ()
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueStructure):
+            assert value.type() == mt.type_Graph_EdgeTopology()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueStructure(mt.type_Graph_EdgeTopology(), value))
+
+    @property
+    def va_key(self) -> Graph_VertexKey:
+        v = self.vpr_value.at("vaKey")
+        return Graph_VertexKey(v)
+
+    @va_key.setter
+    def va_key(self, value: Graph_VertexKey) -> None:
+        self.vpr_value.set("vaKey", value.vpr_value)
+
+    @property
+    def vb_key(self) -> Graph_VertexKey:
+        v = self.vpr_value.at("vbKey")
+        return Graph_VertexKey(v)
+
+    @vb_key.setter
+    def vb_key(self, value: Graph_VertexKey) -> None:
+        self.vpr_value.set("vbKey", value.vpr_value)
+
+
+    def copy(self) -> Graph_EdgeTopology:
+        return Graph_EdgeTopology(self.vpr_value.copy())
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None, pack_sized: bool = False) -> Graph_EdgeTopology:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueStructure.cast(dsviper.Value.decode(blob, mt.type_Graph_EdgeTopology(), md.definitions(), stream_codec_instancing=stream_codec_instancing, pack_sized=pack_sized))
+        return Graph_EdgeTopology(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading, pack_sized: bool = False) -> Graph_EdgeTopology:
+        value = dsviper.ValueStructure.cast(dsviper.Value.read(mt.type_Graph_EdgeTopology(), stream_reading, md.definitions(), pack_sized=pack_sized))
+        return Graph_EdgeTopology(value)
+
+# struct Graph::GraphDescription
+class Graph_GraphDescription(Proxy):
+    """
+    [A proxy class for struct Graph::GraphDescription]
+
+    The descriptive information's.
+    """
+
+    __slots__ = ()
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueStructure):
+            assert value.type() == mt.type_Graph_GraphDescription()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueStructure(mt.type_Graph_GraphDescription(), value))
+
+    @property
+    def name(self) -> str:
+        v = self.vpr_value.at("name")
+        return v
+
+    @name.setter
+    def name(self, value: str) -> None:
+        self.vpr_value.set("name", value)
+
+    @property
+    def author(self) -> str:
+        v = self.vpr_value.at("author")
+        return v
+
+    @author.setter
+    def author(self, value: str) -> None:
+        self.vpr_value.set("author", value)
+
+    @property
+    def create_date(self) -> str:
+        v = self.vpr_value.at("createDate")
+        return v
+
+    @create_date.setter
+    def create_date(self, value: str) -> None:
+        self.vpr_value.set("createDate", value)
+
+
+    def copy(self) -> Graph_GraphDescription:
+        return Graph_GraphDescription(self.vpr_value.copy())
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None, pack_sized: bool = False) -> Graph_GraphDescription:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueStructure.cast(dsviper.Value.decode(blob, mt.type_Graph_GraphDescription(), md.definitions(), stream_codec_instancing=stream_codec_instancing, pack_sized=pack_sized))
+        return Graph_GraphDescription(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading, pack_sized: bool = False) -> Graph_GraphDescription:
+        value = dsviper.ValueStructure.cast(dsviper.Value.read(mt.type_Graph_GraphDescription(), stream_reading, md.definitions(), pack_sized=pack_sized))
+        return Graph_GraphDescription(value)
+
+# struct Graph::GraphSelection
+class Graph_GraphSelection(Proxy):
+    """
+    [A proxy class for struct Graph::GraphSelection]
+
+    The selected vertices and edges.
+    """
+
+    __slots__ = ()
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueStructure):
+            assert value.type() == mt.type_Graph_GraphSelection()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueStructure(mt.type_Graph_GraphSelection(), value))
+
+    @property
+    def vertex_keys(self) -> Set_Graph_VertexKey:
+        v = self.vpr_value.at("vertexKeys")
+        return Set_Graph_VertexKey(v)
+
+    @vertex_keys.setter
+    def vertex_keys(self, value: Set_Graph_VertexKey) -> None:
+        self.vpr_value.set("vertexKeys", value.vpr_value)
+
+    @property
+    def edge_keys(self) -> Set_Graph_EdgeKey:
+        v = self.vpr_value.at("edgeKeys")
+        return Set_Graph_EdgeKey(v)
+
+    @edge_keys.setter
+    def edge_keys(self, value: Set_Graph_EdgeKey) -> None:
+        self.vpr_value.set("edgeKeys", value.vpr_value)
+
+
+    def copy(self) -> Graph_GraphSelection:
+        return Graph_GraphSelection(self.vpr_value.copy())
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None, pack_sized: bool = False) -> Graph_GraphSelection:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueStructure.cast(dsviper.Value.decode(blob, mt.type_Graph_GraphSelection(), md.definitions(), stream_codec_instancing=stream_codec_instancing, pack_sized=pack_sized))
+        return Graph_GraphSelection(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading, pack_sized: bool = False) -> Graph_GraphSelection:
+        value = dsviper.ValueStructure.cast(dsviper.Value.read(mt.type_Graph_GraphSelection(), stream_reading, md.definitions(), pack_sized=pack_sized))
+        return Graph_GraphSelection(value)
+
+# struct Graph::GraphTopology
+class Graph_GraphTopology(Proxy):
+    """
+    [A proxy class for struct Graph::GraphTopology]
+
+    The vertices and edges of the graph topology.
+    """
+
+    __slots__ = ()
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueStructure):
+            assert value.type() == mt.type_Graph_GraphTopology()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueStructure(mt.type_Graph_GraphTopology(), value))
+
+    @property
+    def vertex_keys(self) -> Set_Graph_VertexKey:
+        v = self.vpr_value.at("vertexKeys")
+        return Set_Graph_VertexKey(v)
+
+    @vertex_keys.setter
+    def vertex_keys(self, value: Set_Graph_VertexKey) -> None:
+        self.vpr_value.set("vertexKeys", value.vpr_value)
+
+    @property
+    def edge_keys(self) -> Set_Graph_EdgeKey:
+        v = self.vpr_value.at("edgeKeys")
+        return Set_Graph_EdgeKey(v)
+
+    @edge_keys.setter
+    def edge_keys(self, value: Set_Graph_EdgeKey) -> None:
+        self.vpr_value.set("edgeKeys", value.vpr_value)
+
+
+    def copy(self) -> Graph_GraphTopology:
+        return Graph_GraphTopology(self.vpr_value.copy())
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None, pack_sized: bool = False) -> Graph_GraphTopology:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueStructure.cast(dsviper.Value.decode(blob, mt.type_Graph_GraphTopology(), md.definitions(), stream_codec_instancing=stream_codec_instancing, pack_sized=pack_sized))
+        return Graph_GraphTopology(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading, pack_sized: bool = False) -> Graph_GraphTopology:
+        value = dsviper.ValueStructure.cast(dsviper.Value.read(mt.type_Graph_GraphTopology(), stream_reading, md.definitions(), pack_sized=pack_sized))
+        return Graph_GraphTopology(value)
+
+# struct Graph::Position
+class Graph_Position(Proxy):
+    """
+    [A proxy class for struct Graph::Position]
+
+    A Position.
+    """
+
+    __slots__ = ()
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueStructure):
+            assert value.type() == mt.type_Graph_Position()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueStructure(mt.type_Graph_Position(), value))
+
+    @property
+    def x(self) -> float:
+        v = self.vpr_value.at("x")
+        return v
+
+    @x.setter
+    def x(self, value: float) -> None:
+        self.vpr_value.set("x", value)
+
+    @property
+    def y(self) -> float:
+        v = self.vpr_value.at("y")
+        return v
+
+    @y.setter
+    def y(self, value: float) -> None:
+        self.vpr_value.set("y", value)
+
+
+    def copy(self) -> Graph_Position:
+        return Graph_Position(self.vpr_value.copy())
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None, pack_sized: bool = False) -> Graph_Position:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueStructure.cast(dsviper.Value.decode(blob, mt.type_Graph_Position(), md.definitions(), stream_codec_instancing=stream_codec_instancing, pack_sized=pack_sized))
+        return Graph_Position(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading, pack_sized: bool = False) -> Graph_Position:
+        value = dsviper.ValueStructure.cast(dsviper.Value.read(mt.type_Graph_Position(), stream_reading, md.definitions(), pack_sized=pack_sized))
+        return Graph_Position(value)
+
+# struct Graph::Rectangle
+class Graph_Rectangle(Proxy):
+    """
+    [A proxy class for struct Graph::Rectangle]
+
+    A Rectangle.
+    """
+
+    __slots__ = ()
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueStructure):
+            assert value.type() == mt.type_Graph_Rectangle()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueStructure(mt.type_Graph_Rectangle(), value))
+
+    @property
+    def x(self) -> float:
+        """
+        the x origin.
+        """
+
+        v = self.vpr_value.at("x")
+        return v
+
+    @x.setter
+    def x(self, value: float) -> None:
+        self.vpr_value.set("x", value)
+
+    @property
+    def y(self) -> float:
+        """
+        the y origin.
+        """
+
+        v = self.vpr_value.at("y")
+        return v
+
+    @y.setter
+    def y(self, value: float) -> None:
+        self.vpr_value.set("y", value)
+
+    @property
+    def w(self) -> float:
+        """
+        the width.
+        """
+
+        v = self.vpr_value.at("w")
+        return v
+
+    @w.setter
+    def w(self, value: float) -> None:
+        self.vpr_value.set("w", value)
+
+    @property
+    def h(self) -> float:
+        """
+        the height.
+        """
+
+        v = self.vpr_value.at("h")
+        return v
+
+    @h.setter
+    def h(self, value: float) -> None:
+        self.vpr_value.set("h", value)
+
+
+    def copy(self) -> Graph_Rectangle:
+        return Graph_Rectangle(self.vpr_value.copy())
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None, pack_sized: bool = False) -> Graph_Rectangle:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueStructure.cast(dsviper.Value.decode(blob, mt.type_Graph_Rectangle(), md.definitions(), stream_codec_instancing=stream_codec_instancing, pack_sized=pack_sized))
+        return Graph_Rectangle(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading, pack_sized: bool = False) -> Graph_Rectangle:
+        value = dsviper.ValueStructure.cast(dsviper.Value.read(mt.type_Graph_Rectangle(), stream_reading, md.definitions(), pack_sized=pack_sized))
+        return Graph_Rectangle(value)
+
+# struct Graph::Vertex2DAttributes
+class Graph_Vertex2DAttributes(Proxy):
+    """
+    [A proxy class for struct Graph::Vertex2DAttributes]
+
+    The attributes used to render a topological vertex in 2D.
+    """
+
+    __slots__ = ()
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueStructure):
+            assert value.type() == mt.type_Graph_Vertex2DAttributes()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueStructure(mt.type_Graph_Vertex2DAttributes(), value))
+
+    @property
+    def position(self) -> Graph_Position:
+        v = self.vpr_value.at("position")
+        return Graph_Position(v)
+
+    @position.setter
+    def position(self, value: Graph_Position) -> None:
+        self.vpr_value.set("position", value.vpr_value)
+
+
+    def copy(self) -> Graph_Vertex2DAttributes:
+        return Graph_Vertex2DAttributes(self.vpr_value.copy())
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None, pack_sized: bool = False) -> Graph_Vertex2DAttributes:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueStructure.cast(dsviper.Value.decode(blob, mt.type_Graph_Vertex2DAttributes(), md.definitions(), stream_codec_instancing=stream_codec_instancing, pack_sized=pack_sized))
+        return Graph_Vertex2DAttributes(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading, pack_sized: bool = False) -> Graph_Vertex2DAttributes:
+        value = dsviper.ValueStructure.cast(dsviper.Value.read(mt.type_Graph_Vertex2DAttributes(), stream_reading, md.definitions(), pack_sized=pack_sized))
+        return Graph_Vertex2DAttributes(value)
+
+# struct Graph::VertexVisualAttributes
+class Graph_VertexVisualAttributes(Proxy):
+    """
+    [A proxy class for struct Graph::VertexVisualAttributes]
+
+    The visual attributes of a vertex.
+    """
+
+    __slots__ = ()
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueStructure):
+            assert value.type() == mt.type_Graph_VertexVisualAttributes()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueStructure(mt.type_Graph_VertexVisualAttributes(), value))
+
+    @property
+    def value(self) -> int:
+        v = self.vpr_value.at("value")
+        return v
+
+    @value.setter
+    def value(self, value: int) -> None:
+        self.vpr_value.set("value", value)
+
+    @property
+    def color(self) -> Graph_Color:
+        v = self.vpr_value.at("color")
+        return Graph_Color(v)
+
+    @color.setter
+    def color(self, value: Graph_Color) -> None:
+        self.vpr_value.set("color", value.vpr_value)
+
+
+    def copy(self) -> Graph_VertexVisualAttributes:
+        return Graph_VertexVisualAttributes(self.vpr_value.copy())
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None, pack_sized: bool = False) -> Graph_VertexVisualAttributes:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueStructure.cast(dsviper.Value.decode(blob, mt.type_Graph_VertexVisualAttributes(), md.definitions(), stream_codec_instancing=stream_codec_instancing, pack_sized=pack_sized))
+        return Graph_VertexVisualAttributes(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading, pack_sized: bool = False) -> Graph_VertexVisualAttributes:
+        value = dsviper.ValueStructure.cast(dsviper.Value.read(mt.type_Graph_VertexVisualAttributes(), stream_reading, md.definitions(), pack_sized=pack_sized))
+        return Graph_VertexVisualAttributes(value)
+
+# optional<any_concept>
+class Optional_AnyConceptKey(Proxy):
+    """[A proxy class for std::optional<AnyConceptKey>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueOptional):
+            assert value.type() == mt.type_optional_AnyConceptKey()
+            super().__init__(value)
+        elif isinstance(value, AnyConceptKey):
+            v = value.vpr_value
+            super().__init__(dsviper.ValueOptional(mt.type_optional_AnyConceptKey(), v))
+        else:
+            super().__init__(dsviper.ValueOptional(mt.type_optional_AnyConceptKey(), value))
+
+    def __bool__(self) -> bool:
+        return not self.is_nil()
+
+    def is_nil(self) -> bool:
+        return self.vpr_value.is_nil()
+
+    def wrap(self, value) -> None:
+        self.vpr_value.wrap(value.vpr_value)
+
+    def unwrap(self) -> AnyConceptKey:
+        v = self.vpr_value.unwrap()
+        return AnyConceptKey(v)
+
+    def get(self, default: AnyConceptKey | None = None) -> AnyConceptKey:
+        if default is None:
+            v = self.vpr_value.unwrap()
+        else:
+            d = default.vpr_value
+            v = self.vpr_value.get(d)
+        return AnyConceptKey(v)
+
+    def copy(self) -> Optional_AnyConceptKey:
+        return Optional_AnyConceptKey(dsviper.Value.copy(self.vpr_value))
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Optional_AnyConceptKey:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueOptional.cast(dsviper.Value.decode(blob, mt.type_optional_AnyConceptKey(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Optional_AnyConceptKey(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Optional_AnyConceptKey:
+        value = dsviper.ValueOptional.cast(dsviper.Value.read(mt.type_optional_AnyConceptKey(), stream_reading, md.definitions()))
+        return Optional_AnyConceptKey(value)
+
+# optional<Graph::Edge>
+class Optional_Graph_EdgeKey(Proxy):
+    """[A proxy class for std::optional<Graph::EdgeKey>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueOptional):
+            assert value.type() == mt.type_optional_Graph_EdgeKey()
+            super().__init__(value)
+        elif isinstance(value, Graph_EdgeKey):
+            v = value.vpr_value
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_EdgeKey(), v))
+        else:
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_EdgeKey(), value))
+
+    def __bool__(self) -> bool:
+        return not self.is_nil()
+
+    def is_nil(self) -> bool:
+        return self.vpr_value.is_nil()
+
+    def wrap(self, value) -> None:
+        self.vpr_value.wrap(value.vpr_value)
+
+    def unwrap(self) -> Graph_EdgeKey:
+        v = self.vpr_value.unwrap()
+        return Graph_EdgeKey(v)
+
+    def get(self, default: Graph_EdgeKey | None = None) -> Graph_EdgeKey:
+        if default is None:
+            v = self.vpr_value.unwrap()
+        else:
+            d = default.vpr_value
+            v = self.vpr_value.get(d)
+        return Graph_EdgeKey(v)
+
+    def copy(self) -> Optional_Graph_EdgeKey:
+        return Optional_Graph_EdgeKey(dsviper.Value.copy(self.vpr_value))
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Optional_Graph_EdgeKey:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueOptional.cast(dsviper.Value.decode(blob, mt.type_optional_Graph_EdgeKey(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Optional_Graph_EdgeKey(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Optional_Graph_EdgeKey:
+        value = dsviper.ValueOptional.cast(dsviper.Value.read(mt.type_optional_Graph_EdgeKey(), stream_reading, md.definitions()))
+        return Optional_Graph_EdgeKey(value)
+
+# optional<Graph::EdgeTopology>
+class Optional_Graph_EdgeTopology(Proxy):
+    """[A proxy class for std::optional<Graph::EdgeTopology>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueOptional):
+            assert value.type() == mt.type_optional_Graph_EdgeTopology()
+            super().__init__(value)
+        elif isinstance(value, Graph_EdgeTopology):
+            v = value.vpr_value
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_EdgeTopology(), v))
+        else:
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_EdgeTopology(), value))
+
+    def __bool__(self) -> bool:
+        return not self.is_nil()
+
+    def is_nil(self) -> bool:
+        return self.vpr_value.is_nil()
+
+    def wrap(self, value) -> None:
+        self.vpr_value.wrap(value.vpr_value)
+
+    def unwrap(self) -> Graph_EdgeTopology:
+        v = self.vpr_value.unwrap()
+        return Graph_EdgeTopology(v)
+
+    def get(self, default: Graph_EdgeTopology | None = None) -> Graph_EdgeTopology:
+        if default is None:
+            v = self.vpr_value.unwrap()
+        else:
+            d = default.vpr_value
+            v = self.vpr_value.get(d)
+        return Graph_EdgeTopology(v)
+
+    def copy(self) -> Optional_Graph_EdgeTopology:
+        return Optional_Graph_EdgeTopology(dsviper.Value.copy(self.vpr_value))
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Optional_Graph_EdgeTopology:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueOptional.cast(dsviper.Value.decode(blob, mt.type_optional_Graph_EdgeTopology(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Optional_Graph_EdgeTopology(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Optional_Graph_EdgeTopology:
+        value = dsviper.ValueOptional.cast(dsviper.Value.read(mt.type_optional_Graph_EdgeTopology(), stream_reading, md.definitions()))
+        return Optional_Graph_EdgeTopology(value)
+
+# optional<Graph::GraphDescription>
+class Optional_Graph_GraphDescription(Proxy):
+    """[A proxy class for std::optional<Graph::GraphDescription>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueOptional):
+            assert value.type() == mt.type_optional_Graph_GraphDescription()
+            super().__init__(value)
+        elif isinstance(value, Graph_GraphDescription):
+            v = value.vpr_value
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_GraphDescription(), v))
+        else:
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_GraphDescription(), value))
+
+    def __bool__(self) -> bool:
+        return not self.is_nil()
+
+    def is_nil(self) -> bool:
+        return self.vpr_value.is_nil()
+
+    def wrap(self, value) -> None:
+        self.vpr_value.wrap(value.vpr_value)
+
+    def unwrap(self) -> Graph_GraphDescription:
+        v = self.vpr_value.unwrap()
+        return Graph_GraphDescription(v)
+
+    def get(self, default: Graph_GraphDescription | None = None) -> Graph_GraphDescription:
+        if default is None:
+            v = self.vpr_value.unwrap()
+        else:
+            d = default.vpr_value
+            v = self.vpr_value.get(d)
+        return Graph_GraphDescription(v)
+
+    def copy(self) -> Optional_Graph_GraphDescription:
+        return Optional_Graph_GraphDescription(dsviper.Value.copy(self.vpr_value))
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Optional_Graph_GraphDescription:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueOptional.cast(dsviper.Value.decode(blob, mt.type_optional_Graph_GraphDescription(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Optional_Graph_GraphDescription(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Optional_Graph_GraphDescription:
+        value = dsviper.ValueOptional.cast(dsviper.Value.read(mt.type_optional_Graph_GraphDescription(), stream_reading, md.definitions()))
+        return Optional_Graph_GraphDescription(value)
+
+# optional<Graph::Graph>
+class Optional_Graph_GraphKey(Proxy):
+    """[A proxy class for std::optional<Graph::GraphKey>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueOptional):
+            assert value.type() == mt.type_optional_Graph_GraphKey()
+            super().__init__(value)
+        elif isinstance(value, Graph_GraphKey):
+            v = value.vpr_value
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_GraphKey(), v))
+        else:
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_GraphKey(), value))
+
+    def __bool__(self) -> bool:
+        return not self.is_nil()
+
+    def is_nil(self) -> bool:
+        return self.vpr_value.is_nil()
+
+    def wrap(self, value) -> None:
+        self.vpr_value.wrap(value.vpr_value)
+
+    def unwrap(self) -> Graph_GraphKey:
+        v = self.vpr_value.unwrap()
+        return Graph_GraphKey(v)
+
+    def get(self, default: Graph_GraphKey | None = None) -> Graph_GraphKey:
+        if default is None:
+            v = self.vpr_value.unwrap()
+        else:
+            d = default.vpr_value
+            v = self.vpr_value.get(d)
+        return Graph_GraphKey(v)
+
+    def copy(self) -> Optional_Graph_GraphKey:
+        return Optional_Graph_GraphKey(dsviper.Value.copy(self.vpr_value))
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Optional_Graph_GraphKey:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueOptional.cast(dsviper.Value.decode(blob, mt.type_optional_Graph_GraphKey(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Optional_Graph_GraphKey(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Optional_Graph_GraphKey:
+        value = dsviper.ValueOptional.cast(dsviper.Value.read(mt.type_optional_Graph_GraphKey(), stream_reading, md.definitions()))
+        return Optional_Graph_GraphKey(value)
+
+# optional<Graph::GraphSelection>
+class Optional_Graph_GraphSelection(Proxy):
+    """[A proxy class for std::optional<Graph::GraphSelection>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueOptional):
+            assert value.type() == mt.type_optional_Graph_GraphSelection()
+            super().__init__(value)
+        elif isinstance(value, Graph_GraphSelection):
+            v = value.vpr_value
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_GraphSelection(), v))
+        else:
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_GraphSelection(), value))
+
+    def __bool__(self) -> bool:
+        return not self.is_nil()
+
+    def is_nil(self) -> bool:
+        return self.vpr_value.is_nil()
+
+    def wrap(self, value) -> None:
+        self.vpr_value.wrap(value.vpr_value)
+
+    def unwrap(self) -> Graph_GraphSelection:
+        v = self.vpr_value.unwrap()
+        return Graph_GraphSelection(v)
+
+    def get(self, default: Graph_GraphSelection | None = None) -> Graph_GraphSelection:
+        if default is None:
+            v = self.vpr_value.unwrap()
+        else:
+            d = default.vpr_value
+            v = self.vpr_value.get(d)
+        return Graph_GraphSelection(v)
+
+    def copy(self) -> Optional_Graph_GraphSelection:
+        return Optional_Graph_GraphSelection(dsviper.Value.copy(self.vpr_value))
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Optional_Graph_GraphSelection:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueOptional.cast(dsviper.Value.decode(blob, mt.type_optional_Graph_GraphSelection(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Optional_Graph_GraphSelection(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Optional_Graph_GraphSelection:
+        value = dsviper.ValueOptional.cast(dsviper.Value.read(mt.type_optional_Graph_GraphSelection(), stream_reading, md.definitions()))
+        return Optional_Graph_GraphSelection(value)
+
+# optional<Graph::GraphTopology>
+class Optional_Graph_GraphTopology(Proxy):
+    """[A proxy class for std::optional<Graph::GraphTopology>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueOptional):
+            assert value.type() == mt.type_optional_Graph_GraphTopology()
+            super().__init__(value)
+        elif isinstance(value, Graph_GraphTopology):
+            v = value.vpr_value
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_GraphTopology(), v))
+        else:
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_GraphTopology(), value))
+
+    def __bool__(self) -> bool:
+        return not self.is_nil()
+
+    def is_nil(self) -> bool:
+        return self.vpr_value.is_nil()
+
+    def wrap(self, value) -> None:
+        self.vpr_value.wrap(value.vpr_value)
+
+    def unwrap(self) -> Graph_GraphTopology:
+        v = self.vpr_value.unwrap()
+        return Graph_GraphTopology(v)
+
+    def get(self, default: Graph_GraphTopology | None = None) -> Graph_GraphTopology:
+        if default is None:
+            v = self.vpr_value.unwrap()
+        else:
+            d = default.vpr_value
+            v = self.vpr_value.get(d)
+        return Graph_GraphTopology(v)
+
+    def copy(self) -> Optional_Graph_GraphTopology:
+        return Optional_Graph_GraphTopology(dsviper.Value.copy(self.vpr_value))
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Optional_Graph_GraphTopology:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueOptional.cast(dsviper.Value.decode(blob, mt.type_optional_Graph_GraphTopology(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Optional_Graph_GraphTopology(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Optional_Graph_GraphTopology:
+        value = dsviper.ValueOptional.cast(dsviper.Value.read(mt.type_optional_Graph_GraphTopology(), stream_reading, md.definitions()))
+        return Optional_Graph_GraphTopology(value)
+
+# optional<Graph::Vertex2DAttributes>
+class Optional_Graph_Vertex2DAttributes(Proxy):
+    """[A proxy class for std::optional<Graph::Vertex2DAttributes>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueOptional):
+            assert value.type() == mt.type_optional_Graph_Vertex2DAttributes()
+            super().__init__(value)
+        elif isinstance(value, Graph_Vertex2DAttributes):
+            v = value.vpr_value
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_Vertex2DAttributes(), v))
+        else:
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_Vertex2DAttributes(), value))
+
+    def __bool__(self) -> bool:
+        return not self.is_nil()
+
+    def is_nil(self) -> bool:
+        return self.vpr_value.is_nil()
+
+    def wrap(self, value) -> None:
+        self.vpr_value.wrap(value.vpr_value)
+
+    def unwrap(self) -> Graph_Vertex2DAttributes:
+        v = self.vpr_value.unwrap()
+        return Graph_Vertex2DAttributes(v)
+
+    def get(self, default: Graph_Vertex2DAttributes | None = None) -> Graph_Vertex2DAttributes:
+        if default is None:
+            v = self.vpr_value.unwrap()
+        else:
+            d = default.vpr_value
+            v = self.vpr_value.get(d)
+        return Graph_Vertex2DAttributes(v)
+
+    def copy(self) -> Optional_Graph_Vertex2DAttributes:
+        return Optional_Graph_Vertex2DAttributes(dsviper.Value.copy(self.vpr_value))
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Optional_Graph_Vertex2DAttributes:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueOptional.cast(dsviper.Value.decode(blob, mt.type_optional_Graph_Vertex2DAttributes(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Optional_Graph_Vertex2DAttributes(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Optional_Graph_Vertex2DAttributes:
+        value = dsviper.ValueOptional.cast(dsviper.Value.read(mt.type_optional_Graph_Vertex2DAttributes(), stream_reading, md.definitions()))
+        return Optional_Graph_Vertex2DAttributes(value)
+
+# optional<Graph::Vertex>
+class Optional_Graph_VertexKey(Proxy):
+    """[A proxy class for std::optional<Graph::VertexKey>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueOptional):
+            assert value.type() == mt.type_optional_Graph_VertexKey()
+            super().__init__(value)
+        elif isinstance(value, Graph_VertexKey):
+            v = value.vpr_value
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_VertexKey(), v))
+        else:
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_VertexKey(), value))
+
+    def __bool__(self) -> bool:
+        return not self.is_nil()
+
+    def is_nil(self) -> bool:
+        return self.vpr_value.is_nil()
+
+    def wrap(self, value) -> None:
+        self.vpr_value.wrap(value.vpr_value)
+
+    def unwrap(self) -> Graph_VertexKey:
+        v = self.vpr_value.unwrap()
+        return Graph_VertexKey(v)
+
+    def get(self, default: Graph_VertexKey | None = None) -> Graph_VertexKey:
+        if default is None:
+            v = self.vpr_value.unwrap()
+        else:
+            d = default.vpr_value
+            v = self.vpr_value.get(d)
+        return Graph_VertexKey(v)
+
+    def copy(self) -> Optional_Graph_VertexKey:
+        return Optional_Graph_VertexKey(dsviper.Value.copy(self.vpr_value))
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Optional_Graph_VertexKey:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueOptional.cast(dsviper.Value.decode(blob, mt.type_optional_Graph_VertexKey(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Optional_Graph_VertexKey(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Optional_Graph_VertexKey:
+        value = dsviper.ValueOptional.cast(dsviper.Value.read(mt.type_optional_Graph_VertexKey(), stream_reading, md.definitions()))
+        return Optional_Graph_VertexKey(value)
+
+# optional<Graph::VertexVisualAttributes>
+class Optional_Graph_VertexVisualAttributes(Proxy):
+    """[A proxy class for std::optional<Graph::VertexVisualAttributes>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueOptional):
+            assert value.type() == mt.type_optional_Graph_VertexVisualAttributes()
+            super().__init__(value)
+        elif isinstance(value, Graph_VertexVisualAttributes):
+            v = value.vpr_value
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_VertexVisualAttributes(), v))
+        else:
+            super().__init__(dsviper.ValueOptional(mt.type_optional_Graph_VertexVisualAttributes(), value))
+
+    def __bool__(self) -> bool:
+        return not self.is_nil()
+
+    def is_nil(self) -> bool:
+        return self.vpr_value.is_nil()
+
+    def wrap(self, value) -> None:
+        self.vpr_value.wrap(value.vpr_value)
+
+    def unwrap(self) -> Graph_VertexVisualAttributes:
+        v = self.vpr_value.unwrap()
+        return Graph_VertexVisualAttributes(v)
+
+    def get(self, default: Graph_VertexVisualAttributes | None = None) -> Graph_VertexVisualAttributes:
+        if default is None:
+            v = self.vpr_value.unwrap()
+        else:
+            d = default.vpr_value
+            v = self.vpr_value.get(d)
+        return Graph_VertexVisualAttributes(v)
+
+    def copy(self) -> Optional_Graph_VertexVisualAttributes:
+        return Optional_Graph_VertexVisualAttributes(dsviper.Value.copy(self.vpr_value))
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Optional_Graph_VertexVisualAttributes:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueOptional.cast(dsviper.Value.decode(blob, mt.type_optional_Graph_VertexVisualAttributes(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Optional_Graph_VertexVisualAttributes(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Optional_Graph_VertexVisualAttributes:
+        value = dsviper.ValueOptional.cast(dsviper.Value.read(mt.type_optional_Graph_VertexVisualAttributes(), stream_reading, md.definitions()))
+        return Optional_Graph_VertexVisualAttributes(value)
+
+# optional<xarray<string>>
+class Optional_XArray_string(Proxy):
+    """[A proxy class for std::optional<Viper::XArray<std::string>>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueOptional):
+            assert value.type() == mt.type_optional_xarray_string()
+            super().__init__(value)
+        elif isinstance(value, XArray_string):
+            v = value.vpr_value
+            super().__init__(dsviper.ValueOptional(mt.type_optional_xarray_string(), v))
+        else:
+            super().__init__(dsviper.ValueOptional(mt.type_optional_xarray_string(), value))
+
+    def __bool__(self) -> bool:
+        return not self.is_nil()
+
+    def is_nil(self) -> bool:
+        return self.vpr_value.is_nil()
+
+    def wrap(self, value) -> None:
+        self.vpr_value.wrap(value.vpr_value)
+
+    def unwrap(self) -> XArray_string:
+        v = self.vpr_value.unwrap()
+        return XArray_string(v)
+
+    def get(self, default: XArray_string | None = None) -> XArray_string:
+        if default is None:
+            v = self.vpr_value.unwrap()
+        else:
+            d = default.vpr_value
+            v = self.vpr_value.get(d)
+        return XArray_string(v)
+
+    def copy(self) -> Optional_XArray_string:
+        return Optional_XArray_string(dsviper.Value.copy(self.vpr_value))
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Optional_XArray_string:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueOptional.cast(dsviper.Value.decode(blob, mt.type_optional_xarray_string(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Optional_XArray_string(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Optional_XArray_string:
+        value = dsviper.ValueOptional.cast(dsviper.Value.read(mt.type_optional_xarray_string(), stream_reading, md.definitions()))
+        return Optional_XArray_string(value)
+
+# optional<map<string, string>>
+class Optional_Map_string_to_string(Proxy):
+    """[A proxy class for std::optional<std::map<std::string, std::string>>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueOptional):
+            assert value.type() == mt.type_optional_map_string_to_string()
+            super().__init__(value)
+        elif isinstance(value, Map_string_to_string):
+            v = value.vpr_value
+            super().__init__(dsviper.ValueOptional(mt.type_optional_map_string_to_string(), v))
+        else:
+            super().__init__(dsviper.ValueOptional(mt.type_optional_map_string_to_string(), value))
+
+    def __bool__(self) -> bool:
+        return not self.is_nil()
+
+    def is_nil(self) -> bool:
+        return self.vpr_value.is_nil()
+
+    def wrap(self, value) -> None:
+        self.vpr_value.wrap(value.vpr_value)
+
+    def unwrap(self) -> Map_string_to_string:
+        v = self.vpr_value.unwrap()
+        return Map_string_to_string(v)
+
+    def get(self, default: Map_string_to_string | None = None) -> Map_string_to_string:
+        if default is None:
+            v = self.vpr_value.unwrap()
+        else:
+            d = default.vpr_value
+            v = self.vpr_value.get(d)
+        return Map_string_to_string(v)
+
+    def copy(self) -> Optional_Map_string_to_string:
+        return Optional_Map_string_to_string(dsviper.Value.copy(self.vpr_value))
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Optional_Map_string_to_string:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueOptional.cast(dsviper.Value.decode(blob, mt.type_optional_map_string_to_string(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Optional_Map_string_to_string(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Optional_Map_string_to_string:
+        value = dsviper.ValueOptional.cast(dsviper.Value.read(mt.type_optional_map_string_to_string(), stream_reading, md.definitions()))
+        return Optional_Map_string_to_string(value)
+
+# vector<string>
+class Vector_string(Proxy):
+    """[A proxy class for std::vector<std::string>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueVector):
+            assert value.type() == mt.type_vector_string()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueVector(mt.type_vector_string(), value))
+
+    def __iter__(self) -> typing.Iterator[str]:
+        return Vector_string_Iter(self)
+
+    def __len__(self) -> int:
+        return len(self.vpr_value)
+
+    def __getitem__(self, item: int) -> str:
+        v = self.vpr_value[item]
+        return v
+
+    def __setitem__(self, item: int, value: str) -> None:
+        self.vpr_value[item] = value
+
+    def __contains__(self, value: str) -> bool:
+        v = value
+        return v in self.vpr_value
+
+    def __add__(self, other: Vector_string) -> Vector_string:
+        return Vector_string(self.vpr_value + other.vpr_value)
+
+    def __iadd__(self, other: Vector_string) -> Vector_string:
+        self.vpr_value += other.vpr_value
+        return self
+
+    def append(self, value: str) -> None:
+        self.vpr_value.append(value)
+
+    def copy(self) -> Vector_string:
+        return Vector_string(self.vpr_value.copy())
+
+    def clear(self) -> None:
+        self.vpr_value.clear()
+
+    def count(self, value: str) -> int:
+        return self.vpr_value.count(value)
+
+    def extend(self, other: Vector_string) -> None:
+        self.vpr_value.extend(other.vpr_value)
+
+    def index(self, value: str) -> int:
+        return self.vpr_value.index(value)
+
+    def insert(self, index: int, value: str) -> None:
+        self.vpr_value.insert(index, value)
+
+    def pop(self, index: int = -1) -> str:
+        value = self.vpr_value.pop(index)
+        return value
+
+    def remove(self, value: str) -> None:
+        self.vpr_value.remove(value)
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) -> Vector_string:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueVector.cast(dsviper.Value.decode(blob, mt.type_vector_string(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Vector_string(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Vector_string:
+        value = dsviper.ValueVector.cast(dsviper.Value.read(mt.type_vector_string(), stream_reading, md.definitions()))
+        return Vector_string(value)
+
+
+class Vector_string_Iter:
+    def __init__(self, value: Vector_string):
+        self.__iter = iter(value.vpr_value)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self) -> str:
+        v = next(self.__iter)
+        return v
+
+
+# set<key<Graph::Edge>>
+class Set_Graph_EdgeKey(Proxy):
+    """[A proxy class for std::set<Graph::EdgeKey>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueSet):
+            assert value.type() == mt.type_set_Graph_EdgeKey()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueSet(mt.type_set_Graph_EdgeKey(), value))
+
+    def __iter__(self) -> typing.Iterator[Graph_EdgeKey]:
+        return Set_Graph_EdgeKey_Iter(self)
+
+    def __len__(self) -> int:
+        return len(self.vpr_value)
+
+    def __getitem__(self, item: int) -> Graph_EdgeKey:
+        v = self.vpr_value[item]
+        return Graph_EdgeKey(v)
+
+    def __contains__(self, value: Graph_EdgeKey) -> bool:
+        v = value.vpr_value
+        return v in self.vpr_value
+
+    def __and__(self, other: Set_Graph_EdgeKey) -> Set_Graph_EdgeKey:
+        return self.intersection(other)
+
+    def __iand__(self, other: Set_Graph_EdgeKey) -> Set_Graph_EdgeKey:
+        self.intersection_update(other)
+        return self
+
+    def __or__(self, other: Set_Graph_EdgeKey) -> Set_Graph_EdgeKey:
+        return self.union(other)
+
+    def __ior__(self, other: Set_Graph_EdgeKey) -> Set_Graph_EdgeKey:
+        self.update(other)
+        return self
+
+    def __sub__(self, other: Set_Graph_EdgeKey) -> Set_Graph_EdgeKey:
+        return self.difference(other)
+
+    def __isub__(self, other: Set_Graph_EdgeKey) -> Set_Graph_EdgeKey:
+        self.difference_update(other)
+        return self
+
+    def __xor__(self, other: Set_Graph_EdgeKey) -> Set_Graph_EdgeKey:
+        return self.symmetric_difference(other)
+
+    def __ixor__(self, other: Set_Graph_EdgeKey) -> Set_Graph_EdgeKey:
+        self.symmetric_difference_update(other)
+        return self
+
+    def add(self, value: Graph_EdgeKey) -> None:
+        self.vpr_value.add(value.vpr_value)
+
+    def clear(self) -> None:
+        self.vpr_value.clear()
+
+    def copy(self) -> Set_Graph_EdgeKey:
+        return Set_Graph_EdgeKey(self.vpr_value.copy())
+
+    def difference(self, other: Set_Graph_EdgeKey) -> Set_Graph_EdgeKey:
+        return Set_Graph_EdgeKey(self.vpr_value.difference(other.vpr_value))
+
+    def difference_update(self, other: Set_Graph_EdgeKey) -> None:
+        self.vpr_value.difference_update(other.vpr_value)
+
+    def discard(self, value: Graph_EdgeKey) -> None:
+        self.vpr_value.discard(value.vpr_value)
+
+    def intersection(self, other: Set_Graph_EdgeKey) -> Set_Graph_EdgeKey:
+        return Set_Graph_EdgeKey(self.vpr_value.intersection(other.vpr_value))
+
+    def intersection_update(self, other: Set_Graph_EdgeKey) -> None:
+        self.vpr_value.update(other.vpr_value)
+
+    def isdisjoint(self, other: Set_Graph_EdgeKey) -> bool:
+        return self.vpr_value.isdisjoint(other.vpr_value)
+
+    def issubset(self, other: Set_Graph_EdgeKey) -> bool:
+        return self.vpr_value.issubset(other.vpr_value)
+
+    def issuperset(self, other: Set_Graph_EdgeKey) -> bool:
+        return self.vpr_value.issuperset(other.vpr_value)
+
+    def pop(self) -> Graph_EdgeKey:
+        v = self.vpr_value.pop()
+        return Graph_EdgeKey(v)
+
+    def remove(self, value: Graph_EdgeKey) -> None:
+        return self.vpr_value.remove(value.vpr_value)
+
+    def symmetric_difference(self, other: Set_Graph_EdgeKey) ->  Set_Graph_EdgeKey:
+        return Set_Graph_EdgeKey(self.vpr_value.symmetric_difference(other.vpr_value))
+
+    def symmetric_difference_update(self, other: Set_Graph_EdgeKey) -> None:
+        self.vpr_value.symmetric_difference_update(other.vpr_value)
+
+    def union(self, other: Set_Graph_EdgeKey) -> Set_Graph_EdgeKey:
+        return Set_Graph_EdgeKey(self.vpr_value.union(other.vpr_value))
+
+    def update(self, other: Set_Graph_EdgeKey) -> None:
+        self.vpr_value.update(other.vpr_value)
+
+    def min(self) -> Graph_EdgeKey:
+        v = self.vpr_value.min()
+        return Graph_EdgeKey(v)
+
+    def max(self) -> Graph_EdgeKey:
+        v = self.vpr_value.max()
+        return Graph_EdgeKey(v)
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Set_Graph_EdgeKey:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueSet.cast(dsviper.Value.decode(blob, mt.type_set_Graph_EdgeKey(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Set_Graph_EdgeKey(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Set_Graph_EdgeKey:
+        value = dsviper.ValueSet.cast(dsviper.Value.read(mt.type_set_Graph_EdgeKey(), stream_reading, md.definitions()))
+        return Set_Graph_EdgeKey(value)
+
+
+class Set_Graph_EdgeKey_Iter:
+    def __init__(self, value: Set_Graph_EdgeKey):
+        self.__iter = iter(value.vpr_value)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self) -> Graph_EdgeKey:
+        v = next(self.__iter)
+        return Graph_EdgeKey(v)
+
+
+# set<Graph::Graph>
+class Set_Graph_GraphKey(Proxy):
+    """[A proxy class for std::set<Graph::GraphKey>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueSet):
+            assert value.type() == mt.type_set_Graph_GraphKey()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueSet(mt.type_set_Graph_GraphKey(), value))
+
+    def __iter__(self) -> typing.Iterator[Graph_GraphKey]:
+        return Set_Graph_GraphKey_Iter(self)
+
+    def __len__(self) -> int:
+        return len(self.vpr_value)
+
+    def __getitem__(self, item: int) -> Graph_GraphKey:
+        v = self.vpr_value[item]
+        return Graph_GraphKey(v)
+
+    def __contains__(self, value: Graph_GraphKey) -> bool:
+        v = value.vpr_value
+        return v in self.vpr_value
+
+    def __and__(self, other: Set_Graph_GraphKey) -> Set_Graph_GraphKey:
+        return self.intersection(other)
+
+    def __iand__(self, other: Set_Graph_GraphKey) -> Set_Graph_GraphKey:
+        self.intersection_update(other)
+        return self
+
+    def __or__(self, other: Set_Graph_GraphKey) -> Set_Graph_GraphKey:
+        return self.union(other)
+
+    def __ior__(self, other: Set_Graph_GraphKey) -> Set_Graph_GraphKey:
+        self.update(other)
+        return self
+
+    def __sub__(self, other: Set_Graph_GraphKey) -> Set_Graph_GraphKey:
+        return self.difference(other)
+
+    def __isub__(self, other: Set_Graph_GraphKey) -> Set_Graph_GraphKey:
+        self.difference_update(other)
+        return self
+
+    def __xor__(self, other: Set_Graph_GraphKey) -> Set_Graph_GraphKey:
+        return self.symmetric_difference(other)
+
+    def __ixor__(self, other: Set_Graph_GraphKey) -> Set_Graph_GraphKey:
+        self.symmetric_difference_update(other)
+        return self
+
+    def add(self, value: Graph_GraphKey) -> None:
+        self.vpr_value.add(value.vpr_value)
+
+    def clear(self) -> None:
+        self.vpr_value.clear()
+
+    def copy(self) -> Set_Graph_GraphKey:
+        return Set_Graph_GraphKey(self.vpr_value.copy())
+
+    def difference(self, other: Set_Graph_GraphKey) -> Set_Graph_GraphKey:
+        return Set_Graph_GraphKey(self.vpr_value.difference(other.vpr_value))
+
+    def difference_update(self, other: Set_Graph_GraphKey) -> None:
+        self.vpr_value.difference_update(other.vpr_value)
+
+    def discard(self, value: Graph_GraphKey) -> None:
+        self.vpr_value.discard(value.vpr_value)
+
+    def intersection(self, other: Set_Graph_GraphKey) -> Set_Graph_GraphKey:
+        return Set_Graph_GraphKey(self.vpr_value.intersection(other.vpr_value))
+
+    def intersection_update(self, other: Set_Graph_GraphKey) -> None:
+        self.vpr_value.update(other.vpr_value)
+
+    def isdisjoint(self, other: Set_Graph_GraphKey) -> bool:
+        return self.vpr_value.isdisjoint(other.vpr_value)
+
+    def issubset(self, other: Set_Graph_GraphKey) -> bool:
+        return self.vpr_value.issubset(other.vpr_value)
+
+    def issuperset(self, other: Set_Graph_GraphKey) -> bool:
+        return self.vpr_value.issuperset(other.vpr_value)
+
+    def pop(self) -> Graph_GraphKey:
+        v = self.vpr_value.pop()
+        return Graph_GraphKey(v)
+
+    def remove(self, value: Graph_GraphKey) -> None:
+        return self.vpr_value.remove(value.vpr_value)
+
+    def symmetric_difference(self, other: Set_Graph_GraphKey) ->  Set_Graph_GraphKey:
+        return Set_Graph_GraphKey(self.vpr_value.symmetric_difference(other.vpr_value))
+
+    def symmetric_difference_update(self, other: Set_Graph_GraphKey) -> None:
+        self.vpr_value.symmetric_difference_update(other.vpr_value)
+
+    def union(self, other: Set_Graph_GraphKey) -> Set_Graph_GraphKey:
+        return Set_Graph_GraphKey(self.vpr_value.union(other.vpr_value))
+
+    def update(self, other: Set_Graph_GraphKey) -> None:
+        self.vpr_value.update(other.vpr_value)
+
+    def min(self) -> Graph_GraphKey:
+        v = self.vpr_value.min()
+        return Graph_GraphKey(v)
+
+    def max(self) -> Graph_GraphKey:
+        v = self.vpr_value.max()
+        return Graph_GraphKey(v)
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Set_Graph_GraphKey:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueSet.cast(dsviper.Value.decode(blob, mt.type_set_Graph_GraphKey(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Set_Graph_GraphKey(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Set_Graph_GraphKey:
+        value = dsviper.ValueSet.cast(dsviper.Value.read(mt.type_set_Graph_GraphKey(), stream_reading, md.definitions()))
+        return Set_Graph_GraphKey(value)
+
+
+class Set_Graph_GraphKey_Iter:
+    def __init__(self, value: Set_Graph_GraphKey):
+        self.__iter = iter(value.vpr_value)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self) -> Graph_GraphKey:
+        v = next(self.__iter)
+        return Graph_GraphKey(v)
+
+
+# set<key<Graph::Vertex>>
+class Set_Graph_VertexKey(Proxy):
+    """[A proxy class for std::set<Graph::VertexKey>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueSet):
+            assert value.type() == mt.type_set_Graph_VertexKey()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueSet(mt.type_set_Graph_VertexKey(), value))
+
+    def __iter__(self) -> typing.Iterator[Graph_VertexKey]:
+        return Set_Graph_VertexKey_Iter(self)
+
+    def __len__(self) -> int:
+        return len(self.vpr_value)
+
+    def __getitem__(self, item: int) -> Graph_VertexKey:
+        v = self.vpr_value[item]
+        return Graph_VertexKey(v)
+
+    def __contains__(self, value: Graph_VertexKey) -> bool:
+        v = value.vpr_value
+        return v in self.vpr_value
+
+    def __and__(self, other: Set_Graph_VertexKey) -> Set_Graph_VertexKey:
+        return self.intersection(other)
+
+    def __iand__(self, other: Set_Graph_VertexKey) -> Set_Graph_VertexKey:
+        self.intersection_update(other)
+        return self
+
+    def __or__(self, other: Set_Graph_VertexKey) -> Set_Graph_VertexKey:
+        return self.union(other)
+
+    def __ior__(self, other: Set_Graph_VertexKey) -> Set_Graph_VertexKey:
+        self.update(other)
+        return self
+
+    def __sub__(self, other: Set_Graph_VertexKey) -> Set_Graph_VertexKey:
+        return self.difference(other)
+
+    def __isub__(self, other: Set_Graph_VertexKey) -> Set_Graph_VertexKey:
+        self.difference_update(other)
+        return self
+
+    def __xor__(self, other: Set_Graph_VertexKey) -> Set_Graph_VertexKey:
+        return self.symmetric_difference(other)
+
+    def __ixor__(self, other: Set_Graph_VertexKey) -> Set_Graph_VertexKey:
+        self.symmetric_difference_update(other)
+        return self
+
+    def add(self, value: Graph_VertexKey) -> None:
+        self.vpr_value.add(value.vpr_value)
+
+    def clear(self) -> None:
+        self.vpr_value.clear()
+
+    def copy(self) -> Set_Graph_VertexKey:
+        return Set_Graph_VertexKey(self.vpr_value.copy())
+
+    def difference(self, other: Set_Graph_VertexKey) -> Set_Graph_VertexKey:
+        return Set_Graph_VertexKey(self.vpr_value.difference(other.vpr_value))
+
+    def difference_update(self, other: Set_Graph_VertexKey) -> None:
+        self.vpr_value.difference_update(other.vpr_value)
+
+    def discard(self, value: Graph_VertexKey) -> None:
+        self.vpr_value.discard(value.vpr_value)
+
+    def intersection(self, other: Set_Graph_VertexKey) -> Set_Graph_VertexKey:
+        return Set_Graph_VertexKey(self.vpr_value.intersection(other.vpr_value))
+
+    def intersection_update(self, other: Set_Graph_VertexKey) -> None:
+        self.vpr_value.update(other.vpr_value)
+
+    def isdisjoint(self, other: Set_Graph_VertexKey) -> bool:
+        return self.vpr_value.isdisjoint(other.vpr_value)
+
+    def issubset(self, other: Set_Graph_VertexKey) -> bool:
+        return self.vpr_value.issubset(other.vpr_value)
+
+    def issuperset(self, other: Set_Graph_VertexKey) -> bool:
+        return self.vpr_value.issuperset(other.vpr_value)
+
+    def pop(self) -> Graph_VertexKey:
+        v = self.vpr_value.pop()
+        return Graph_VertexKey(v)
+
+    def remove(self, value: Graph_VertexKey) -> None:
+        return self.vpr_value.remove(value.vpr_value)
+
+    def symmetric_difference(self, other: Set_Graph_VertexKey) ->  Set_Graph_VertexKey:
+        return Set_Graph_VertexKey(self.vpr_value.symmetric_difference(other.vpr_value))
+
+    def symmetric_difference_update(self, other: Set_Graph_VertexKey) -> None:
+        self.vpr_value.symmetric_difference_update(other.vpr_value)
+
+    def union(self, other: Set_Graph_VertexKey) -> Set_Graph_VertexKey:
+        return Set_Graph_VertexKey(self.vpr_value.union(other.vpr_value))
+
+    def update(self, other: Set_Graph_VertexKey) -> None:
+        self.vpr_value.update(other.vpr_value)
+
+    def min(self) -> Graph_VertexKey:
+        v = self.vpr_value.min()
+        return Graph_VertexKey(v)
+
+    def max(self) -> Graph_VertexKey:
+        v = self.vpr_value.max()
+        return Graph_VertexKey(v)
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Set_Graph_VertexKey:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueSet.cast(dsviper.Value.decode(blob, mt.type_set_Graph_VertexKey(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Set_Graph_VertexKey(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Set_Graph_VertexKey:
+        value = dsviper.ValueSet.cast(dsviper.Value.read(mt.type_set_Graph_VertexKey(), stream_reading, md.definitions()))
+        return Set_Graph_VertexKey(value)
+
+
+class Set_Graph_VertexKey_Iter:
+    def __init__(self, value: Set_Graph_VertexKey):
+        self.__iter = iter(value.vpr_value)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self) -> Graph_VertexKey:
+        v = next(self.__iter)
+        return Graph_VertexKey(v)
+
+
+# set<string>
+class Set_string(Proxy):
+    """[A proxy class for std::set<std::string>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueSet):
+            assert value.type() == mt.type_set_string()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueSet(mt.type_set_string(), value))
+
+    def __iter__(self) -> typing.Iterator[str]:
+        return Set_string_Iter(self)
+
+    def __len__(self) -> int:
+        return len(self.vpr_value)
+
+    def __getitem__(self, item: int) -> str:
+        v = self.vpr_value[item]
+        return v
+
+    def __contains__(self, value: str) -> bool:
+        v = value
+        return v in self.vpr_value
+
+    def __and__(self, other: Set_string) -> Set_string:
+        return self.intersection(other)
+
+    def __iand__(self, other: Set_string) -> Set_string:
+        self.intersection_update(other)
+        return self
+
+    def __or__(self, other: Set_string) -> Set_string:
+        return self.union(other)
+
+    def __ior__(self, other: Set_string) -> Set_string:
+        self.update(other)
+        return self
+
+    def __sub__(self, other: Set_string) -> Set_string:
+        return self.difference(other)
+
+    def __isub__(self, other: Set_string) -> Set_string:
+        self.difference_update(other)
+        return self
+
+    def __xor__(self, other: Set_string) -> Set_string:
+        return self.symmetric_difference(other)
+
+    def __ixor__(self, other: Set_string) -> Set_string:
+        self.symmetric_difference_update(other)
+        return self
+
+    def add(self, value: str) -> None:
+        self.vpr_value.add(value)
+
+    def clear(self) -> None:
+        self.vpr_value.clear()
+
+    def copy(self) -> Set_string:
+        return Set_string(self.vpr_value.copy())
+
+    def difference(self, other: Set_string) -> Set_string:
+        return Set_string(self.vpr_value.difference(other.vpr_value))
+
+    def difference_update(self, other: Set_string) -> None:
+        self.vpr_value.difference_update(other.vpr_value)
+
+    def discard(self, value: str) -> None:
+        self.vpr_value.discard(value)
+
+    def intersection(self, other: Set_string) -> Set_string:
+        return Set_string(self.vpr_value.intersection(other.vpr_value))
+
+    def intersection_update(self, other: Set_string) -> None:
+        self.vpr_value.update(other.vpr_value)
+
+    def isdisjoint(self, other: Set_string) -> bool:
+        return self.vpr_value.isdisjoint(other.vpr_value)
+
+    def issubset(self, other: Set_string) -> bool:
+        return self.vpr_value.issubset(other.vpr_value)
+
+    def issuperset(self, other: Set_string) -> bool:
+        return self.vpr_value.issuperset(other.vpr_value)
+
+    def pop(self) -> str:
+        v = self.vpr_value.pop()
+        return v
+
+    def remove(self, value: str) -> None:
+        return self.vpr_value.remove(value)
+
+    def symmetric_difference(self, other: Set_string) ->  Set_string:
+        return Set_string(self.vpr_value.symmetric_difference(other.vpr_value))
+
+    def symmetric_difference_update(self, other: Set_string) -> None:
+        self.vpr_value.symmetric_difference_update(other.vpr_value)
+
+    def union(self, other: Set_string) -> Set_string:
+        return Set_string(self.vpr_value.union(other.vpr_value))
+
+    def update(self, other: Set_string) -> None:
+        self.vpr_value.update(other.vpr_value)
+
+    def min(self) -> str:
+        v = self.vpr_value.min()
+        return v
+
+    def max(self) -> str:
+        v = self.vpr_value.max()
+        return v
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) ->Set_string:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueSet.cast(dsviper.Value.decode(blob, mt.type_set_string(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Set_string(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Set_string:
+        value = dsviper.ValueSet.cast(dsviper.Value.read(mt.type_set_string(), stream_reading, md.definitions()))
+        return Set_string(value)
+
+
+class Set_string_Iter:
+    def __init__(self, value: Set_string):
+        self.__iter = iter(value.vpr_value)
+
+    def __iter__(self):
+        return self
+
+    def __next__(self) -> str:
+        v = next(self.__iter)
+        return v
+
+
+# map<string, string>
+class Map_string_to_string(Proxy):
+    """[A proxy class for std::map<std::string, std::string>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueMap):
+            assert value.type() == mt.type_map_string_to_string()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueMap(mt.type_map_string_to_string(), value))
+
+    def __iter__(self) -> typing.Iterator[str]:
+        return  Map_string_to_string_KeysIter(self)
+
+    def __len__(self) -> int:
+        return len(self.vpr_value)
+
+    def __setitem__(self, key: str, value: str) -> None:
+        self.vpr_value[key] = value
+
+    def __getitem__(self, key: str) -> str:
+        v = self.vpr_value[key]
+        return v
+
+    def __delitem__(self, key: str) -> None:
+        del(self.vpr_value[key])
+
+    def __contains__(self, value: str) -> bool:
+        v = value
+        return v in self.vpr_value
+
+    def clear(self) -> None:
+        self.vpr_value.clear()
+
+    def copy(self) -> Map_string_to_string:
+        return Map_string_to_string(self.vpr_value.copy())
+
+    def get(self, key: str, default: str | None = None) -> str | None:
+        if default is not None:
+            v = self.vpr_value.get(key, default)
+        else:
+            v = self.vpr_value.get(key)
+        return v if v is not None else None
+
+    def items(self) -> typing.Iterator[tuple[str, str]]:
+        return Map_string_to_string_ItemsIter(self)
+
+    def keys(self) -> typing.Iterator[str]:
+        return Map_string_to_string_KeysIter(self)
+
+    def pop(self, key: str, default: str | None = None) -> str | None:
+        if default is not None:
+            v = self.vpr_value.pop(key, default)
+        else:
+            v = self.vpr_value.pop(key)
+        return v if v is not None else None
+
+    def popitem(self) -> tuple[str, str]:
+        t = self.vpr_value.popitem()
+        return t[0], t[1]
+
+    def setdefault(self, key: str, default: str) -> None:
+        self.vpr_value.setdefault(key, default)
+
+    def update(self, other: Map_string_to_string):
+        self.vpr_value.update(other.vpr_value)
+
+    def values(self) -> typing.Iterator[str]:
+        return Map_string_to_string_ValuesIter(self)
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) -> Map_string_to_string:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueMap.cast(dsviper.Value.decode(blob, mt.type_map_string_to_string(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return Map_string_to_string(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> Map_string_to_string:
+        value = dsviper.ValueMap.cast(dsviper.Value.read(mt.type_map_string_to_string(), stream_reading, md.definitions()))
+        return Map_string_to_string(value)
+
+
+class Map_string_to_string_ItemsIter:
+    def __init__(self, value: Map_string_to_string):
+        self.__iter = iter(value.vpr_value.items())
+
+    def __iter__(self):
+        return self
+
+    def __next__(self) -> tuple[str, str]:
+        k, v = next(self.__iter)
+        return k, v
+
+
+class Map_string_to_string_KeysIter:
+    def __init__(self, value: Map_string_to_string):
+        self.__iter = iter(value.vpr_value.keys())
+
+    def __iter__(self):
+        return self
+
+    def __next__(self) -> str:
+        v = next(self.__iter)
+        return v
+
+
+class Map_string_to_string_ValuesIter:
+    def __init__(self, value: Map_string_to_string):
+        self.__iter = iter(value.vpr_value.values())
+
+    def __iter__(self):
+        return self
+
+    def __next__(self) -> str:
+        v = next(self.__iter)
+        return v
+
+
+# xarray<string>
+class XArray_string(Proxy):
+    """[A proxy class for Viper::XArray<std::string>]"""
+
+    __slots__ = []
+
+    def __init__(self, value=None):
+        if isinstance(value, dsviper.ValueXArray):
+            assert value.type() == mt.type_xarray_string()
+            super().__init__(value)
+        else:
+            super().__init__(dsviper.ValueXArray(mt.type_xarray_string(), value))
+
+    def __len__(self) -> int:
+        return len(self.vpr_value)
+
+    def __getitem__(self, item: int | dsviper.ValueUUId) -> str | None:
+        v = self.vpr_value[item]
+        return v if v is not None else None
+
+    def __setitem__(self, item: int | dsviper.ValueUUId, value: str):
+        self.vpr_value[item] = value
+
+    def __contains__(self, value: str) -> bool:
+        v = value
+        return v in self.vpr_value
+
+    def copy(self) -> XArray_string:
+        return XArray_string(self.vpr_value.copy())
+
+    def positions(self) -> list[dsviper.ValueUUId]:
+        return self.vpr_value.positions()
+
+    def items(self) -> list[tuple[dsviper.ValueUUId, str]]:
+        return self.vpr_value.items()
+
+    def to_vector(self) -> Vector_string:
+       return Vector_string(self.vpr_value.to_vector())
+
+    @staticmethod
+    def end() -> dsviper.ValueUUId:
+        return dsviper.ValueXArray.END
+
+    @staticmethod
+    def create_position() -> dsviper.ValueUUId:
+        return dsviper.ValueXArray.create_position()
+
+    def index(self, position: dsviper.ValueUUId) -> int | None:
+        return self.vpr_value.index(position)
+
+    def position(self, index: int) -> dsviper.ValueUUId | None:
+        return self.vpr_value.position(index)
+
+    def has_position(self, position: dsviper.ValueUUId) -> bool:
+        return self.vpr_value.has_position(position)
+
+    def insert_position(self, before_position: dsviper.ValueUUId, new_position: dsviper.ValueUUId) -> None:
+        self.vpr_value.insert_position(before_position, new_position)
+
+    def disable_position(self, position: dsviper.ValueUUId) -> None:
+        self.vpr_value.disable_position(position)
+
+    def insert(self, before_position: dsviper.ValueUUId, value: str, new_position: dsviper.ValueUUId | None = None):
+        if new_position is not None:
+            self.vpr_value.insert(before_position, value, new_position)
+        else:
+            self.vpr_value.insert(before_position, value)
+
+    def set(self, position: dsviper.ValueUUId, value: str) -> None:
+        self.vpr_value.set(position, value)
+
+    def at(self, position: dsviper.ValueUUId) -> str | None:
+        v = self.vpr_value.at(position)
+        return v if v is not None else None
+
+    def remove(self, position: dsviper.ValueUUId) -> None:
+        self.vpr_value.remove(position)
+
+    def append(self, value: str) -> None:
+        self.vpr_value.append(value)
+
+    def position_of(self, value: str) -> dsviper.ValueUUId | None:
+        return self.vpr_value.position_of(value)
+
+    @staticmethod
+    def decode(blob: dsviper.ValueBlob, *, stream_codec_instancing: dsviper.StreamCodecInstancing | None = None) -> XArray_string:
+        stream_codec_instancing = stream_codec_instancing if stream_codec_instancing is not None else dsviper.Codec.STREAM_BINARY
+        value = dsviper.ValueXArray.cast(dsviper.Value.decode(blob, mt.type_xarray_string(), md.definitions(), stream_codec_instancing=stream_codec_instancing))
+        return XArray_string(value)
+
+    @staticmethod
+    def read(stream_reading: dsviper.StreamReading) -> XArray_string:
+        value = dsviper.ValueXArray.cast(dsviper.Value.read(mt.type_xarray_string(), stream_reading, md.definitions()))
+        return XArray_string(value)
+
+
+
+__all__ = [
+    "AnyConceptKey",
+    "Graph_EdgeKey",
+    "Graph_GraphKey",
+    "Graph_VertexKey",
+    "Graph_Color",
+    "Graph_EdgeTopology",
+    "Graph_GraphDescription",
+    "Graph_GraphSelection",
+    "Graph_GraphTopology",
+    "Graph_Position",
+    "Graph_Rectangle",
+    "Graph_Vertex2DAttributes",
+    "Graph_VertexVisualAttributes",
+    "Optional_AnyConceptKey",
+    "Optional_Graph_EdgeKey",
+    "Optional_Graph_EdgeTopology",
+    "Optional_Graph_GraphDescription",
+    "Optional_Graph_GraphKey",
+    "Optional_Graph_GraphSelection",
+    "Optional_Graph_GraphTopology",
+    "Optional_Graph_Vertex2DAttributes",
+    "Optional_Graph_VertexKey",
+    "Optional_Graph_VertexVisualAttributes",
+    "Optional_XArray_string",
+    "Optional_Map_string_to_string",
+    "Vector_string",
+    "Set_Graph_EdgeKey",
+    "Set_Graph_GraphKey",
+    "Set_Graph_VertexKey",
+    "Set_string",
+    "Map_string_to_string",
+    "XArray_string",
+]
+

@@ -1,0 +1,525 @@
+# Copyright (c) Digital Substrate 2026, All rights reserved.
+# Generated from GE.dsmb by kibo-1.2.0.jar
+
+"""
+Viper types for concepts, clubs, enums, structs and all containers defined for ge.
+"""
+
+from __future__ import annotations
+import dsviper
+from . import definitions as md
+
+__type_void: dsviper.TypeVoid | None = None
+def type_void() -> dsviper.TypeVoid:
+    global __type_void
+    if __type_void is None:
+        __type_void = dsviper.TypeVoid()
+    return __type_void
+
+# Numbers
+__type_bool: dsviper.TypeBool | None = None
+def type_bool() -> dsviper.TypeBool:
+    global __type_bool
+    if __type_bool is None:
+        __type_bool = dsviper.TypeBool()
+    return __type_bool
+
+
+__type_uint8: dsviper.TypeUInt8 | None = None
+def type_uint8() -> dsviper.TypeUInt8:
+    global __type_uint8
+    if __type_uint8 is None:
+        __type_uint8 = dsviper.TypeUInt8()
+    return __type_uint8
+
+
+__type_uint16: dsviper.TypeUInt16 | None = None
+def type_uint16() -> dsviper.TypeUInt16:
+    global __type_uint16
+    if __type_uint16 is None:
+        __type_uint16 = dsviper.TypeUInt16()
+    return __type_uint16
+
+
+__type_uint32: dsviper.TypeUInt32 | None = None
+def type_uint32() -> dsviper.TypeUInt32:
+    global __type_uint32
+    if __type_uint32 is None:
+        __type_uint32 = dsviper.TypeUInt32()
+    return __type_uint32
+
+
+__type_uint64: dsviper.TypeUInt64 | None = None
+def type_uint64() -> dsviper.TypeUInt64:
+    global __type_uint64
+    if __type_uint64 is None:
+        __type_uint64 = dsviper.TypeUInt64()
+    return __type_uint64
+
+
+__type_int8: dsviper.TypeInt8 | None = None
+def type_int8() -> dsviper.TypeInt8:
+    global __type_int8
+    if __type_int8 is None:
+        __type_int8 = dsviper.TypeInt8()
+    return __type_int8
+
+
+__type_int16: dsviper.TypeInt16 | None = None
+def type_int16() -> dsviper.TypeInt16:
+    global __type_int16
+    if __type_int16 is None:
+        __type_int16 = dsviper.TypeInt16()
+    return __type_int16
+
+
+__type_int32: dsviper.TypeInt32 | None = None
+def type_int32() -> dsviper.TypeInt32:
+    global __type_int32
+    if __type_int32 is None:
+        __type_int32 = dsviper.TypeInt32()
+    return __type_int32
+
+
+__type_int64: dsviper.TypeInt64 | None = None
+def type_int64() -> dsviper.TypeInt64:
+    global __type_int64
+    if __type_int64 is None:
+        __type_int64 = dsviper.TypeInt64()
+    return __type_int64
+
+
+__type_float: dsviper.TypeFloat | None = None
+def type_float() -> dsviper.TypeFloat:
+    global __type_float
+    if __type_float is None:
+        __type_float = dsviper.TypeFloat()
+    return __type_float
+
+
+__type_double: dsviper.TypeDouble | None = None
+def type_double() -> dsviper.TypeDouble:
+    global __type_double
+    if __type_double is None:
+        __type_double = dsviper.TypeDouble()
+    return __type_double
+
+
+# Ids
+__type_blob_id: dsviper.TypeBlobId | None = None
+def type_blob_id() -> dsviper.TypeBlobId:
+    global __type_blob_id
+    if __type_blob_id is None:
+        __type_blob_id = dsviper.TypeBlobId()
+    return __type_blob_id
+
+
+__type_commit_id: dsviper.TypeCommitId | None = None
+def type_commit_id() -> dsviper.TypeCommitId:
+    global __type_commit_id
+    if __type_commit_id is None:
+        __type_commit_id = dsviper.TypeCommitId()
+    return __type_commit_id
+
+
+__type_uuid: dsviper.TypeUUId | None = None
+def type_uuid() -> dsviper.TypeUUId:
+    global __type_uuid
+    if __type_uuid is None:
+        __type_uuid = dsviper.TypeUUId()
+    return __type_uuid
+
+
+# String & Blob
+__type_string: dsviper.TypeString | None = None
+def type_string() -> dsviper.TypeString:
+    global __type_string
+    if __type_string is None:
+        __type_string = dsviper.TypeString()
+    return __type_string
+
+
+__type_blob: dsviper.TypeBlob | None = None
+def type_blob() -> dsviper.TypeBlob:
+    global __type_blob
+    if __type_blob is None:
+        __type_blob = dsviper.TypeBlob()
+    return __type_blob
+
+
+# Any
+__type_any: dsviper.TypeAny | None = None
+def type_any() -> dsviper.TypeAny:
+    global __type_any
+    if __type_any is None:
+        __type_any = dsviper.TypeAny()
+    return __type_any
+
+
+# AnyConcept
+__type_def_any_concept: dsviper.TypeAnyConcept | None = None
+def type_def_any_concept() -> dsviper.TypeAnyConcept:
+    global __type_def_any_concept
+    if __type_def_any_concept is None:
+        __type_def_any_concept = dsviper.TypeAnyConcept()
+    return __type_def_any_concept
+
+__type_AnyConceptKey: dsviper.TypeKey | None = None
+def type_AnyConceptKey() -> dsviper.TypeKey:
+    global __type_AnyConceptKey
+    if __type_AnyConceptKey is None:
+        __type_AnyConceptKey = dsviper.TypeKey(type_def_any_concept())
+    return __type_AnyConceptKey
+
+# Vecs
+
+# Mats
+
+# Tuples
+
+# Optionals
+__type_optional_AnyConceptKey: dsviper.TypeOptional | None = None
+def type_optional_AnyConceptKey() -> dsviper.TypeOptional:
+    global __type_optional_AnyConceptKey
+    if __type_optional_AnyConceptKey is None:
+        __type_optional_AnyConceptKey = dsviper.TypeOptional(type_AnyConceptKey())
+    return __type_optional_AnyConceptKey
+
+
+__type_optional_Graph_EdgeKey: dsviper.TypeOptional | None = None
+def type_optional_Graph_EdgeKey() -> dsviper.TypeOptional:
+    global __type_optional_Graph_EdgeKey
+    if __type_optional_Graph_EdgeKey is None:
+        __type_optional_Graph_EdgeKey = dsviper.TypeOptional(type_Graph_EdgeKey())
+    return __type_optional_Graph_EdgeKey
+
+
+__type_optional_Graph_EdgeTopology: dsviper.TypeOptional | None = None
+def type_optional_Graph_EdgeTopology() -> dsviper.TypeOptional:
+    global __type_optional_Graph_EdgeTopology
+    if __type_optional_Graph_EdgeTopology is None:
+        __type_optional_Graph_EdgeTopology = dsviper.TypeOptional(type_Graph_EdgeTopology())
+    return __type_optional_Graph_EdgeTopology
+
+
+__type_optional_Graph_GraphDescription: dsviper.TypeOptional | None = None
+def type_optional_Graph_GraphDescription() -> dsviper.TypeOptional:
+    global __type_optional_Graph_GraphDescription
+    if __type_optional_Graph_GraphDescription is None:
+        __type_optional_Graph_GraphDescription = dsviper.TypeOptional(type_Graph_GraphDescription())
+    return __type_optional_Graph_GraphDescription
+
+
+__type_optional_Graph_GraphKey: dsviper.TypeOptional | None = None
+def type_optional_Graph_GraphKey() -> dsviper.TypeOptional:
+    global __type_optional_Graph_GraphKey
+    if __type_optional_Graph_GraphKey is None:
+        __type_optional_Graph_GraphKey = dsviper.TypeOptional(type_Graph_GraphKey())
+    return __type_optional_Graph_GraphKey
+
+
+__type_optional_Graph_GraphSelection: dsviper.TypeOptional | None = None
+def type_optional_Graph_GraphSelection() -> dsviper.TypeOptional:
+    global __type_optional_Graph_GraphSelection
+    if __type_optional_Graph_GraphSelection is None:
+        __type_optional_Graph_GraphSelection = dsviper.TypeOptional(type_Graph_GraphSelection())
+    return __type_optional_Graph_GraphSelection
+
+
+__type_optional_Graph_GraphTopology: dsviper.TypeOptional | None = None
+def type_optional_Graph_GraphTopology() -> dsviper.TypeOptional:
+    global __type_optional_Graph_GraphTopology
+    if __type_optional_Graph_GraphTopology is None:
+        __type_optional_Graph_GraphTopology = dsviper.TypeOptional(type_Graph_GraphTopology())
+    return __type_optional_Graph_GraphTopology
+
+
+__type_optional_Graph_Vertex2DAttributes: dsviper.TypeOptional | None = None
+def type_optional_Graph_Vertex2DAttributes() -> dsviper.TypeOptional:
+    global __type_optional_Graph_Vertex2DAttributes
+    if __type_optional_Graph_Vertex2DAttributes is None:
+        __type_optional_Graph_Vertex2DAttributes = dsviper.TypeOptional(type_Graph_Vertex2DAttributes())
+    return __type_optional_Graph_Vertex2DAttributes
+
+
+__type_optional_Graph_VertexKey: dsviper.TypeOptional | None = None
+def type_optional_Graph_VertexKey() -> dsviper.TypeOptional:
+    global __type_optional_Graph_VertexKey
+    if __type_optional_Graph_VertexKey is None:
+        __type_optional_Graph_VertexKey = dsviper.TypeOptional(type_Graph_VertexKey())
+    return __type_optional_Graph_VertexKey
+
+
+__type_optional_Graph_VertexVisualAttributes: dsviper.TypeOptional | None = None
+def type_optional_Graph_VertexVisualAttributes() -> dsviper.TypeOptional:
+    global __type_optional_Graph_VertexVisualAttributes
+    if __type_optional_Graph_VertexVisualAttributes is None:
+        __type_optional_Graph_VertexVisualAttributes = dsviper.TypeOptional(type_Graph_VertexVisualAttributes())
+    return __type_optional_Graph_VertexVisualAttributes
+
+
+__type_optional_xarray_string: dsviper.TypeOptional | None = None
+def type_optional_xarray_string() -> dsviper.TypeOptional:
+    global __type_optional_xarray_string
+    if __type_optional_xarray_string is None:
+        __type_optional_xarray_string = dsviper.TypeOptional(type_xarray_string())
+    return __type_optional_xarray_string
+
+
+__type_optional_map_string_to_string: dsviper.TypeOptional | None = None
+def type_optional_map_string_to_string() -> dsviper.TypeOptional:
+    global __type_optional_map_string_to_string
+    if __type_optional_map_string_to_string is None:
+        __type_optional_map_string_to_string = dsviper.TypeOptional(type_map_string_to_string())
+    return __type_optional_map_string_to_string
+
+
+
+# Vectors
+__type_vector_string: dsviper.TypeVector | None = None
+def type_vector_string() -> dsviper.TypeVector:
+    global __type_vector_string
+    if __type_vector_string is None:
+        __type_vector_string = dsviper.TypeVector(type_string())
+    return __type_vector_string
+
+
+
+# Sets
+__type_set_Graph_EdgeKey: dsviper.TypeSet | None = None
+def type_set_Graph_EdgeKey() -> dsviper.TypeSet:
+    global __type_set_Graph_EdgeKey
+    if __type_set_Graph_EdgeKey is None:
+        __type_set_Graph_EdgeKey = dsviper.TypeSet(type_Graph_EdgeKey())
+    return __type_set_Graph_EdgeKey
+
+
+__type_set_Graph_GraphKey: dsviper.TypeSet | None = None
+def type_set_Graph_GraphKey() -> dsviper.TypeSet:
+    global __type_set_Graph_GraphKey
+    if __type_set_Graph_GraphKey is None:
+        __type_set_Graph_GraphKey = dsviper.TypeSet(type_Graph_GraphKey())
+    return __type_set_Graph_GraphKey
+
+
+__type_set_Graph_VertexKey: dsviper.TypeSet | None = None
+def type_set_Graph_VertexKey() -> dsviper.TypeSet:
+    global __type_set_Graph_VertexKey
+    if __type_set_Graph_VertexKey is None:
+        __type_set_Graph_VertexKey = dsviper.TypeSet(type_Graph_VertexKey())
+    return __type_set_Graph_VertexKey
+
+
+__type_set_string: dsviper.TypeSet | None = None
+def type_set_string() -> dsviper.TypeSet:
+    global __type_set_string
+    if __type_set_string is None:
+        __type_set_string = dsviper.TypeSet(type_string())
+    return __type_set_string
+
+
+
+# Maps
+__type_map_string_to_string: dsviper.TypeMap | None = None
+def type_map_string_to_string() -> dsviper.TypeMap:
+    global __type_map_string_to_string
+    if __type_map_string_to_string is None:
+        __type_map_string_to_string = dsviper.TypeMap(type_string(), type_string())
+    return __type_map_string_to_string
+
+
+
+# Sets
+__type_xarray_string: dsviper.TypeXArray | None = None
+def type_xarray_string() -> dsviper.TypeXArray:
+    global __type_xarray_string
+    if __type_xarray_string is None:
+        __type_xarray_string = dsviper.TypeXArray(type_string())
+    return __type_xarray_string
+
+
+
+# Variants
+
+# Namespace Graph
+__type_check_Graph_EdgeKey: dsviper.TypeConcept | None = None
+def type_check_Graph_EdgeKey() -> dsviper.TypeConcept:
+    global __type_check_Graph_EdgeKey
+    if __type_check_Graph_EdgeKey is None:
+        __type_check_Graph_EdgeKey = md.definitions().check_concept(md.RuntimeIds.Graph_Edge)
+    return __type_check_Graph_EdgeKey
+
+__type_Graph_EdgeKey: dsviper.TypeKey | None = None
+def type_Graph_EdgeKey() -> dsviper.TypeKey:
+    global __type_Graph_EdgeKey
+    if __type_Graph_EdgeKey is None:
+        __type_Graph_EdgeKey = dsviper.TypeKey(type_check_Graph_EdgeKey())
+    return __type_Graph_EdgeKey
+
+
+__type_check_Graph_GraphKey: dsviper.TypeConcept | None = None
+def type_check_Graph_GraphKey() -> dsviper.TypeConcept:
+    global __type_check_Graph_GraphKey
+    if __type_check_Graph_GraphKey is None:
+        __type_check_Graph_GraphKey = md.definitions().check_concept(md.RuntimeIds.Graph_Graph)
+    return __type_check_Graph_GraphKey
+
+__type_Graph_GraphKey: dsviper.TypeKey | None = None
+def type_Graph_GraphKey() -> dsviper.TypeKey:
+    global __type_Graph_GraphKey
+    if __type_Graph_GraphKey is None:
+        __type_Graph_GraphKey = dsviper.TypeKey(type_check_Graph_GraphKey())
+    return __type_Graph_GraphKey
+
+
+__type_check_Graph_VertexKey: dsviper.TypeConcept | None = None
+def type_check_Graph_VertexKey() -> dsviper.TypeConcept:
+    global __type_check_Graph_VertexKey
+    if __type_check_Graph_VertexKey is None:
+        __type_check_Graph_VertexKey = md.definitions().check_concept(md.RuntimeIds.Graph_Vertex)
+    return __type_check_Graph_VertexKey
+
+__type_Graph_VertexKey: dsviper.TypeKey | None = None
+def type_Graph_VertexKey() -> dsviper.TypeKey:
+    global __type_Graph_VertexKey
+    if __type_Graph_VertexKey is None:
+        __type_Graph_VertexKey = dsviper.TypeKey(type_check_Graph_VertexKey())
+    return __type_Graph_VertexKey
+
+
+__type_Graph_Color: dsviper.TypeStructure | None = None
+def type_Graph_Color() -> dsviper.TypeStructure:
+    global __type_Graph_Color
+    if __type_Graph_Color is None:
+        __type_Graph_Color = md.definitions().check_structure(md.RuntimeIds.Graph_Color)
+    return __type_Graph_Color
+
+
+__type_Graph_EdgeTopology: dsviper.TypeStructure | None = None
+def type_Graph_EdgeTopology() -> dsviper.TypeStructure:
+    global __type_Graph_EdgeTopology
+    if __type_Graph_EdgeTopology is None:
+        __type_Graph_EdgeTopology = md.definitions().check_structure(md.RuntimeIds.Graph_EdgeTopology)
+    return __type_Graph_EdgeTopology
+
+
+__type_Graph_GraphDescription: dsviper.TypeStructure | None = None
+def type_Graph_GraphDescription() -> dsviper.TypeStructure:
+    global __type_Graph_GraphDescription
+    if __type_Graph_GraphDescription is None:
+        __type_Graph_GraphDescription = md.definitions().check_structure(md.RuntimeIds.Graph_GraphDescription)
+    return __type_Graph_GraphDescription
+
+
+__type_Graph_GraphSelection: dsviper.TypeStructure | None = None
+def type_Graph_GraphSelection() -> dsviper.TypeStructure:
+    global __type_Graph_GraphSelection
+    if __type_Graph_GraphSelection is None:
+        __type_Graph_GraphSelection = md.definitions().check_structure(md.RuntimeIds.Graph_GraphSelection)
+    return __type_Graph_GraphSelection
+
+
+__type_Graph_GraphTopology: dsviper.TypeStructure | None = None
+def type_Graph_GraphTopology() -> dsviper.TypeStructure:
+    global __type_Graph_GraphTopology
+    if __type_Graph_GraphTopology is None:
+        __type_Graph_GraphTopology = md.definitions().check_structure(md.RuntimeIds.Graph_GraphTopology)
+    return __type_Graph_GraphTopology
+
+
+__type_Graph_Position: dsviper.TypeStructure | None = None
+def type_Graph_Position() -> dsviper.TypeStructure:
+    global __type_Graph_Position
+    if __type_Graph_Position is None:
+        __type_Graph_Position = md.definitions().check_structure(md.RuntimeIds.Graph_Position)
+    return __type_Graph_Position
+
+
+__type_Graph_Rectangle: dsviper.TypeStructure | None = None
+def type_Graph_Rectangle() -> dsviper.TypeStructure:
+    global __type_Graph_Rectangle
+    if __type_Graph_Rectangle is None:
+        __type_Graph_Rectangle = md.definitions().check_structure(md.RuntimeIds.Graph_Rectangle)
+    return __type_Graph_Rectangle
+
+
+__type_Graph_Vertex2DAttributes: dsviper.TypeStructure | None = None
+def type_Graph_Vertex2DAttributes() -> dsviper.TypeStructure:
+    global __type_Graph_Vertex2DAttributes
+    if __type_Graph_Vertex2DAttributes is None:
+        __type_Graph_Vertex2DAttributes = md.definitions().check_structure(md.RuntimeIds.Graph_Vertex2DAttributes)
+    return __type_Graph_Vertex2DAttributes
+
+
+__type_Graph_VertexVisualAttributes: dsviper.TypeStructure | None = None
+def type_Graph_VertexVisualAttributes() -> dsviper.TypeStructure:
+    global __type_Graph_VertexVisualAttributes
+    if __type_Graph_VertexVisualAttributes is None:
+        __type_Graph_VertexVisualAttributes = md.definitions().check_structure(md.RuntimeIds.Graph_VertexVisualAttributes)
+    return __type_Graph_VertexVisualAttributes
+
+
+__attachment_Graph_Edge_Topology: dsviper.Attachment | None = None
+def attachment_Graph_Edge_Topology() -> dsviper.Attachment:
+    global __attachment_Graph_Edge_Topology
+    if __attachment_Graph_Edge_Topology is None:
+        __attachment_Graph_Edge_Topology = md.definitions().check_attachment(md.AttachmentRuntimeIds.Graph_Edge_Topology)
+    return __attachment_Graph_Edge_Topology
+
+
+__attachment_Graph_Graph_Comments: dsviper.Attachment | None = None
+def attachment_Graph_Graph_Comments() -> dsviper.Attachment:
+    global __attachment_Graph_Graph_Comments
+    if __attachment_Graph_Graph_Comments is None:
+        __attachment_Graph_Graph_Comments = md.definitions().check_attachment(md.AttachmentRuntimeIds.Graph_Graph_Comments)
+    return __attachment_Graph_Graph_Comments
+
+
+__attachment_Graph_Graph_Description: dsviper.Attachment | None = None
+def attachment_Graph_Graph_Description() -> dsviper.Attachment:
+    global __attachment_Graph_Graph_Description
+    if __attachment_Graph_Graph_Description is None:
+        __attachment_Graph_Graph_Description = md.definitions().check_attachment(md.AttachmentRuntimeIds.Graph_Graph_Description)
+    return __attachment_Graph_Graph_Description
+
+
+__attachment_Graph_Graph_Selection: dsviper.Attachment | None = None
+def attachment_Graph_Graph_Selection() -> dsviper.Attachment:
+    global __attachment_Graph_Graph_Selection
+    if __attachment_Graph_Graph_Selection is None:
+        __attachment_Graph_Graph_Selection = md.definitions().check_attachment(md.AttachmentRuntimeIds.Graph_Graph_Selection)
+    return __attachment_Graph_Graph_Selection
+
+
+__attachment_Graph_Graph_Tags: dsviper.Attachment | None = None
+def attachment_Graph_Graph_Tags() -> dsviper.Attachment:
+    global __attachment_Graph_Graph_Tags
+    if __attachment_Graph_Graph_Tags is None:
+        __attachment_Graph_Graph_Tags = md.definitions().check_attachment(md.AttachmentRuntimeIds.Graph_Graph_Tags)
+    return __attachment_Graph_Graph_Tags
+
+
+__attachment_Graph_Graph_Topology: dsviper.Attachment | None = None
+def attachment_Graph_Graph_Topology() -> dsviper.Attachment:
+    global __attachment_Graph_Graph_Topology
+    if __attachment_Graph_Graph_Topology is None:
+        __attachment_Graph_Graph_Topology = md.definitions().check_attachment(md.AttachmentRuntimeIds.Graph_Graph_Topology)
+    return __attachment_Graph_Graph_Topology
+
+
+__attachment_Graph_Vertex_Render2DAttributes: dsviper.Attachment | None = None
+def attachment_Graph_Vertex_Render2DAttributes() -> dsviper.Attachment:
+    global __attachment_Graph_Vertex_Render2DAttributes
+    if __attachment_Graph_Vertex_Render2DAttributes is None:
+        __attachment_Graph_Vertex_Render2DAttributes = md.definitions().check_attachment(md.AttachmentRuntimeIds.Graph_Vertex_Render2DAttributes)
+    return __attachment_Graph_Vertex_Render2DAttributes
+
+
+__attachment_Graph_Vertex_VisualAttributes: dsviper.Attachment | None = None
+def attachment_Graph_Vertex_VisualAttributes() -> dsviper.Attachment:
+    global __attachment_Graph_Vertex_VisualAttributes
+    if __attachment_Graph_Vertex_VisualAttributes is None:
+        __attachment_Graph_Vertex_VisualAttributes = md.definitions().check_attachment(md.AttachmentRuntimeIds.Graph_Vertex_VisualAttributes)
+    return __attachment_Graph_Vertex_VisualAttributes
+
+

@@ -1,0 +1,10 @@
+__pycache__/
+.idea/
+# Claude Code (local only, not for distribution — convention "have but don't commit")
+CLAUDE.md
+.claude/
+.DS_Store
+*.db
+*.db-journal
+*.db-wal
+*.db-shm

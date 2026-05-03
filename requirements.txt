@@ -1,0 +1,5 @@
+dsviper>=1.2.7
+
+# Qt UI for QML apps. Pinned for ecosystem alignment with
+# dsviper-tools, ge-py, and dsviper-components.
+PySide6==6.10.1

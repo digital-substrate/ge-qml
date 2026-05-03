@@ -1,0 +1,53 @@
+# Copyright (c) Digital Substrate 2026, All rights reserved.
+# Generated from GE.dsmb by kibo-1.2.0.jar
+
+"""
+Viper Definitions and runtime ID for ge.
+"""
+
+from __future__ import annotations
+import zlib
+import base64
+import dsviper
+from . import resources as mr
+
+# Definitions
+_DEFINITIONS = None
+
+def definitions() -> dsviper.DefinitionsConst:
+    global _DEFINITIONS
+    if _DEFINITIONS is None:
+        blob = dsviper.ValueBlob(zlib.decompress(base64.b64decode(mr.B64_DEFINITIONS)))
+        defs = dsviper.Definitions.decode(blob)
+        _DEFINITIONS = defs.const()
+    return _DEFINITIONS
+
+# Concept
+class RuntimeIds:
+    # Namespace Graph
+    Graph_Edge: dsviper.ValueUUId = dsviper.ValueUUId.create("4d5c7e70-1262-eac1-f8c1-2eb35df4c5cf")
+    Graph_Graph: dsviper.ValueUUId = dsviper.ValueUUId.create("0785ad82-048d-7992-5680-edd838ee5ad6")
+    Graph_Vertex: dsviper.ValueUUId = dsviper.ValueUUId.create("2f11dc82-c440-640f-b684-210936c58f86")
+    Graph_Color: dsviper.ValueUUId = dsviper.ValueUUId.create("469d48ae-0e43-0a83-54e6-76eb6ca48d1b")
+    Graph_EdgeTopology: dsviper.ValueUUId = dsviper.ValueUUId.create("00c3d01c-4814-2585-d21c-05f482f2ca77")
+    Graph_GraphDescription: dsviper.ValueUUId = dsviper.ValueUUId.create("26b02bf2-78f3-75ff-9fc9-6be36ee21dc8")
+    Graph_GraphSelection: dsviper.ValueUUId = dsviper.ValueUUId.create("6285942c-da2d-82bb-9b4c-8c353ad3dad3")
+    Graph_GraphTopology: dsviper.ValueUUId = dsviper.ValueUUId.create("8908c86a-01f0-60ed-f3e9-204a52ccef05")
+    Graph_Position: dsviper.ValueUUId = dsviper.ValueUUId.create("576fbb64-0742-db36-422b-5a35ff1fa25f")
+    Graph_Rectangle: dsviper.ValueUUId = dsviper.ValueUUId.create("dce3db08-b7f7-946c-f02a-32898c72f40d")
+    Graph_Vertex2DAttributes: dsviper.ValueUUId = dsviper.ValueUUId.create("d233a482-09ff-5363-8316-97ae4ba4ab5e")
+    Graph_VertexVisualAttributes: dsviper.ValueUUId = dsviper.ValueUUId.create("a530433b-d52c-b261-30aa-aa4b3a623fd8")
+    pass
+
+# Attachment
+class AttachmentRuntimeIds:
+    # Namespace Graph
+    Graph_Edge_Topology: dsviper.ValueUUId = dsviper.ValueUUId.create("44178d14-4702-e96c-de66-8ca5108aa560")
+    Graph_Graph_Comments: dsviper.ValueUUId = dsviper.ValueUUId.create("897b2ffb-45b8-e8e0-36cf-7ce37211e431")
+    Graph_Graph_Description: dsviper.ValueUUId = dsviper.ValueUUId.create("5f4ea545-87cb-4292-b40a-3e5b2e78174e")
+    Graph_Graph_Selection: dsviper.ValueUUId = dsviper.ValueUUId.create("eb6f1b63-68dd-1ecc-6bbc-2853648380c4")
+    Graph_Graph_Tags: dsviper.ValueUUId = dsviper.ValueUUId.create("47424e85-2f1f-a78a-f0fc-efeb69391a37")
+    Graph_Graph_Topology: dsviper.ValueUUId = dsviper.ValueUUId.create("09e8fcfb-e07d-3dd7-49d7-d8944538038b")
+    Graph_Vertex_Render2DAttributes: dsviper.ValueUUId = dsviper.ValueUUId.create("7e190bc3-1a6b-ccbe-eecc-6a53b70778cb")
+    Graph_Vertex_VisualAttributes: dsviper.ValueUUId = dsviper.ValueUUId.create("e09f1e7a-cd64-00f8-66b8-ea072397400d")
+    pass
