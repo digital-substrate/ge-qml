@@ -3,6 +3,12 @@
 QML port of the Digital Substrate graph editor, with an integrated
 Python scripting editor.
 
+## Documentation
+
+Full documentation: https://docs.digitalsubstrate.io/reference-apps/
+
+Part of the [DevKit ecosystem](https://docs.digitalsubstrate.io/).
+
 ## Prerequisites
 
 - Python 3.14+
