@@ -10,7 +10,7 @@ from PySide6.QtCore import (
 )
 from enum import IntEnum
 
-from dsviper import CommitStore, CommitNode, CommitNodeGrid, CommitNodeGridBuilder, ValueCommitId
+from dsviper import CommitStore, CommitStateBuilder, CommitNode, CommitNodeGrid, CommitNodeGridBuilder, ValueCommitId
 
 
 NODE_SIZE = 17
@@ -246,7 +246,7 @@ class CommitsModel(QAbstractListModel):
         grid_nodes = self._grid_nodes
 
         # Enabled state
-        enabled_map = db.enabled_by_commit_id(current_cid) if current_cid.is_valid() else {}
+        enabled_map = CommitStateBuilder.enabled_by_commit_id(db, current_cid) if current_cid.is_valid() else {}
 
         # Build flat list sorted by grid row
         entries = []

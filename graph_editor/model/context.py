@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dsviper import CommitStore, CommitDatabase, CommitState, CommitMutableState, ValueCommitId
+from dsviper import CommitStore, CommitDatabase, CommitStateBuilder, CommitState, CommitMutableState, ValueCommitId
 
 from ge import attachments, definitions
 from ge.data import Graph_GraphKey
@@ -26,10 +26,10 @@ class Context:
 
     def use(self, database: CommitDatabase):
         if not database.commit_ids():
-            self._create_initial_commit(database, database.initial_state())
+            self._create_initial_commit(database, CommitStateBuilder.initial_state(database))
 
         commit_id = database.last_commit_id()
-        self.store.set_state(database.state(commit_id))
+        self.store.set_state(CommitStateBuilder.state(database, commit_id))
         self.store.set_database(database)
         self.store.notify_database_did_open()
 
