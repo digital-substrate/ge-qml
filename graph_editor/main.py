@@ -62,6 +62,7 @@ from model.context import Context
 from dsviper_components_qml.commit_admin_model import CommitAdminModel
 from dsviper_components_qml.documents_panel_model import DocumentsPanelModel
 from dsviper_components_qml.license_model import LicenseModel
+from _version import __version__
 from dsviper_components_qml.about_qt_helper import AboutQtHelper
 from dsviper_components_qml.bootstrap import bootstrap_database
 from dsviper_components_qml import register_qml_types
@@ -84,6 +85,7 @@ def main():
     app = QApplication(sys.argv)
     app.setOrganizationName("DigitalSubstrate")
     app.setApplicationName("GraphEditor")
+    app.setApplicationVersion(__version__)
     from PySide6.QtGui import QIcon
     app.setWindowIcon(QIcon(str(Path(__file__).parent / "images" / "app_icon.png")))
     engine = QQmlApplicationEngine()
