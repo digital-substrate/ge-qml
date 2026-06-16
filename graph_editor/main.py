@@ -126,7 +126,7 @@ def main():
     ctx.setContextProperty("renderModel", render_model)
     select_graph_model = SelectGraphModel()
     ctx.setContextProperty("selectGraphModel", select_graph_model)
-    license_model = LicenseModel("Graph Editor", "Graph Editor for Digital Substrate databases")
+    license_model = LicenseModel("Graph Editor", "Graph Editor for Digital Substrate databases", version=__version__)
     ctx.setContextProperty("licenseModel", license_model)
     about_qt_helper = AboutQtHelper()
     ctx.setContextProperty("aboutQtHelper", about_qt_helper)

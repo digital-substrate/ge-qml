@@ -8,7 +8,7 @@ from pathlib import Path
 
 from PySide6.QtCore import QObject, Property, Signal
 
-VERSION = "1.2"
+VERSION = "1.2.1"
 COPYRIGHT = "Copyright (c) 2026 Digital Substrate"
 LICENSE_ID = "MIT"
 
@@ -31,10 +31,11 @@ class LicenseModel(QObject):
 
     infoChanged = Signal()
 
-    def __init__(self, app_name: str, app_description: str, parent=None):
+    def __init__(self, app_name: str, app_description: str, version: str = VERSION, parent=None):
         super().__init__(parent)
         self._app_name = app_name
         self._app_description = app_description
+        self._version = version
 
     # --- QML Properties ---
     def _get_app_name(self): return self._app_name
@@ -43,7 +44,7 @@ class LicenseModel(QObject):
     def _get_app_description(self): return self._app_description
     appDescription = Property(str, _get_app_description, constant=True)
 
-    def _get_version(self): return VERSION
+    def _get_version(self): return self._version
     version = Property(str, _get_version, constant=True)
 
     def _get_copyright(self): return COPYRIGHT
