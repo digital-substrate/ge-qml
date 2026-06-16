@@ -11,7 +11,7 @@ Part of the [DevKit ecosystem](https://docs.digitalsubstrate.io/).
 
 ## Prerequisites
 
-- Python 3.14+
+- Python 3.10-3.14
 
 ## Installation
 
