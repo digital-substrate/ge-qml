@@ -8,7 +8,7 @@ from pathlib import Path
 
 from PySide6.QtCore import QObject, Property, Signal
 
-VERSION = "1.2.1"
+VERSION = "1.2.0"
 COPYRIGHT = "Copyright (c) 2026 Digital Substrate"
 LICENSE_ID = "MIT"
 
