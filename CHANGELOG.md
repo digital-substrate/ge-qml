@@ -14,6 +14,6 @@ First standalone release of the Graph Editor (QML port).
 
 ### Added
 - QML Graph Editor GUI over a Database / CommitDatabase.
-- Runs on Python 3.10–3.14.
+- Runs on Python 3.10–3.14; requires dsviper >= 1.2.16.
 - Independent version line (`_version.py`), reported via the application
   version and the About panel, decoupled from the `dsviper` runtime.
